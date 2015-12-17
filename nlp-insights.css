@@ -1,0 +1,51 @@
+
+/* CSS declarations go here */
+html {
+  font-family: Source Sans Pro sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background-color: #F5FFFA;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Mount_Rainier_cloud_cover.jpg/1280px-Mount_Rainier_cloud_cover.jpg") no-repeat;
+}
+h1 {
+    color: #F0FFFF;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+header {
+  color: #F5FFFA;
+  padding-top: 60px;
+  text-align: center;
+  font-weight: 250px;
+  font-height: 10px;
+  font-size: 18px
+}
+
+template {
+  text-align: center;
+  margin: auto;
+}
+
+.search{
+  text-align: center;
+  padding-top: 20px;
+  margin: auto;
+  width: 50%;
+}
+
