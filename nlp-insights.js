@@ -121,9 +121,9 @@ if (Meteor.isServer) {
  //     this.unblock();
  //     return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
  //    }
- });
+ //});
 
-  Meteor.startup(function () {
+  //Meteor.startup(function () {
  /* Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
@@ -271,7 +271,5 @@ if (Meteor.isServer) {
  //        }
  //        }
  //    });
- //
- //
-  });
+ // });
 }
