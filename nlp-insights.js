@@ -123,7 +123,7 @@ if (Meteor.isServer) {
  });
 
  Meteor.startup(function () {
-    Meteor.call("eventbriteDataGet", function(error, result){
+    /*Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -153,11 +153,12 @@ if (Meteor.isServer) {
           city: "Seattle",
           state: "WA",
           zip: "98101-98199",
+          category: [],
           company_name: "Eventbrite"
         });
       };
     });
-    
+    */
    Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
       var events = JSON.parse(result.content);
@@ -187,6 +188,7 @@ if (Meteor.isServer) {
           city: eventData[i].city_name,
           state: eventData[i].region_abbr,
           zip: eventData[i].postal_code,
+          category: [],
           company_name: "Eventful"
         })
       }
