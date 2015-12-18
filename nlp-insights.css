@@ -8,7 +8,10 @@ html {
 body {
   margin: 0;
   background-color: #F5FFFA;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Mount_Rainier_cloud_cover.jpg/1280px-Mount_Rainier_cloud_cover.jpg") no-repeat;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ), url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Mount_Rainier_cloud_cover.jpg/1280px-Mount_Rainier_cloud_cover.jpg") no-repeat;
 }
 h1 {
     color: #F0FFFF;
@@ -44,7 +47,7 @@ template {
 
 .search-zip{
   text-align: center;
-  padding-top: 20px;
+  padding-top: 60px;
   margin: auto;
   width: 50%;
 }
@@ -63,4 +66,12 @@ li{
   background-color: white;
   font: black;
   float: left;
+}
+
+.categories {
+  color: #F5FFFA;
+  text-align: center;
+  padding-top: 60px;
+  margin: auto;
+  width: 30%;
 }
