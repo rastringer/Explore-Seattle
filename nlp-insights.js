@@ -101,17 +101,17 @@ if (Meteor.isServer) {
 
   });
 
-  // Meteor.methods({
- //    eventbriteDataGet: function(){
- //     this.unblock();
- //     return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
- //   },
+   //Meteor.methods({
+ /*   eventbriteDataGet: function(){
+     this.unblock();
+     return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
+   }*/
  //    //don't forget to put comma after each method
  //
- //    eventfulDataGet: function(){
- //     this.unblock();
- //     return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
- //   },
+/*    eventfulDataGet: function(){
+     this.unblock();
+     return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
+   }*/
  //
     // meetupDataGet: function(){
     //   this.unblock();
@@ -121,50 +121,79 @@ if (Meteor.isServer) {
  //     this.unblock();
  //     return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
  //    }
- // });
+ //});
 
- // Meteor.startup(function () {
- //    Meteor.call("eventbriteDataGet", function(error, result){
- //      if(error) console.log("The error is " + error)
- //      var events = JSON.parse(result.content);
- //      var eventData = events.events;
- //      for(var i = 0; i < eventData.length -1; i++){
- //        if(eventData[i].url != undefined){
- //        Events.insert({
- //          name: eventData[i].name.text,
- //          description: eventData[i].description.text,
- //          address: "Seattle",
- //          time: eventData[i].start.local,
- //          url: eventData[i].url,
- //          city: "Seattle",
- //          state: "WA",
- //          zip: "98101-98199",
- //          company_name: "Eventbrite"
- //        });
-          //}
- //     }
- //    });
- //
- //    Meteor.call("eventfulDataGet", function(error, result){
- //      if(error) console.log("The error is " + error);
- //      var events = JSON.parse(result.content);
- //      var eventData = events.events.event;
- //      for(var i = 0; i < eventData.length -1; i++){
- //        if(eventData[i].url != undefined){
-   //        Events.insert({
-   //          name: eventData[i].title,
-   //          description: eventData[i].description,
-   //          address: eventData[i].venue_address,
-   //          time: eventData[i].start_time,
-   //          url: eventData[i].venue_url,
-   //          city: eventData[i].city_name,
-   //          state: eventData[i].region_abbr,
-   //          zip: eventData[i].postal_code,
-   //          company_name: "Eventful"
-   //        });
-          //}
- //      }
- //    });
+  //Meteor.startup(function () {
+ /* Meteor.call("eventbriteDataGet", function(error, result){
+      if(error) console.log("The error is " + error)
+      var events = JSON.parse(result.content);
+      var eventData = events.events;
+      for(var i = 0; i < eventData.length -1; i++){
+        if(eventData[i].url != undefined)
+          var dateTime = new Date(eventData[i].start.local);
+          var day = dateTime.getDate();
+          var month = dateTime.getMonth() + 1;
+          var year = dateTime.getFullYear();
+          var hour = dateTime.getHours();
+          var minute = dateTime.getMinutes();
+          var dates = day + " "+ month + " " + year;
+          var minuteBuilder = function(minute){
+            if (minute == 0) minute = "00";
+            return  minute;
+          }
+          var minutes = minuteBuilder(minute);
+          var times = hour + ":" + minutes;
+
+        Events.insert({
+          name: eventData[i].name.text,
+          description: eventData[i].description.text,
+          address: "Seattle",
+          time: times,
+          date: dates,
+          url: eventData[i].url,
+          city: "Seattle",
+          state: "WA",
+          zip: "98101-98199",
+          category: [],
+          company_name: "Eventbrite"
+        });
+      };
+    });*/
+    
+   /*Meteor.call("eventfulDataGet", function(error, result){
+      if(error) console.log("The error is " + error);
+      var events = JSON.parse(result.content);
+      var eventData = events.events.event;
+      for(var i = 0; i < eventData.length -1; i++){
+        if(eventData[i].url != undefined)
+          var dateTime = new Date(eventData[i].start_time);
+          var day = dateTime.getDate();
+          var month = dateTime.getMonth() +1;
+          var year = dateTime.getFullYear();
+          var hour = dateTime.getHours();
+          var minute = dateTime.getMinutes();
+          var dates = day+ " "+ month + " " + year;
+          var minuteBuilder = function(minute){
+            if (minute == 0) minute = "00";
+            return  minute;
+          }
+          var minutes = minuteBuilder(minute);
+          var times = hour + ":" + minutes;
+        Events.insert({
+          name: eventData[i].title,
+          description: eventData[i].description,
+          address: eventData[i].venue_address,
+          date: dates,
+          time: times,
+          url: eventData[i]["url"],
+          city: eventData[i].city_name,
+          state: eventData[i].region_abbr,
+          zip: eventData[i].postal_code,
+          category: [],
+          company_name: "Eventful"
+        })
+      }
+    })*/
  //
  //    Meteor.call("brownPaperTicketDataGet", function(error, result){
  //     if(error) console.log("The error is " + error);
@@ -242,7 +271,5 @@ if (Meteor.isServer) {
  //        }
  //        }
  //    });
- //
- //
  // });
 }
