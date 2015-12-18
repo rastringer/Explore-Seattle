@@ -19,7 +19,7 @@ Schemas.Event = new SimpleSchema({
     optional: true
   },
   date:{
-    type: Number,
+    type: String,
     label: "Date",
     optional: true
 
@@ -46,7 +46,7 @@ Schemas.Event = new SimpleSchema({
     optional: true
   },
   zip:{
-    type: Number,
+    type: String,
     label: "Zip",
     optional: true
 
@@ -80,29 +80,29 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
  Meteor.methods({
-  eventbriteDataGet: function(){
+  /*eventbriteDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
-  }
+  }*/
   //don't forget to put comma after each method
 
-  /*eventfulDataGet: function(){
+  eventfulDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
-  }*/
+  }
 
   /*meetupDataGet: function(){
     this.unblock();
     return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
-  },
-  brownPaperTicketDataGet: function(){
+  },*/
+/*  brownPaperTicketDataGet: function(){
    this.unblock();
-   return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
+   return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?keywords=wine+story&amp;e_city=Seattle&amp;id=KxsUrh2jzn");
   }*/
  });
 
  Meteor.startup(function () {
-    /*Meteor.call("eventbriteDataGet", function(error, result){
+    Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -120,26 +120,41 @@ if (Meteor.isServer) {
           company_name: "Eventbrite"
         });
       };
-    });*/
+    });
     
-/*   Meteor.call("eventfulDataGet", function(error, result){
+   /*Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
       var events = JSON.parse(result.content);
       var eventData = events.events.event;
       for(var i = 0; i < eventData.length -1; i++){
         if(eventData[i].url != undefined)
+          var dateTime = new Date(eventData[i].start_time);
+          var day = dateTime.getDate();
+          var month = dateTime.getMonth();
+          var year = dateTime.getFullYear();
+          var hour = dateTime.getHours();
+          var minute = dateTime.getMinutes();
+    
+          var dates = day+ " "+ month + " " + year;
+          var minuteBuilder = function(minute){
+            if (minute == 0) minute = "00";
+            return  minute;
+          }
+          var minutes = minuteBuilder(minute);
+          var times = hour + ":" + minutes;
         Events.insert({
           name: eventData[i].title,
           description: eventData[i].description,
           address: eventData[i].venue_address,
-          time: eventData[i].start_time,
+          date: dates,
+          time: times,
           url: eventData[i].venue_url,
           city: eventData[i].city_name,
           state: eventData[i].region_abbr,
           zip: eventData[i].postal_code,
           company_name: "Eventful"
         });
-      }
+      };
     })*/
     
     /*Meteor.call("meetupDataGet", function(error, result){
@@ -162,11 +177,12 @@ if (Meteor.isServer) {
           company_name: "Meetup"
         })
       }
-    });
-   /* Meteor.call("brownPaperTicketDataGet", function(error, result){
+    });*/
+
+    Meteor.call("brownPaperTicketDataGet", function(error, result){
      if(error) console.log("The error is " + error);
      console.log(result);
    });
-*/
+
  });
 }
