@@ -16,8 +16,9 @@
   </ul>
 </nav>
   <header>
-  <h1>What would you like to do today?</h1>
-</header>
+    <h1>What would you like to do today?</h1>
+  </header>
+
 
 
 <label class="search">
@@ -60,5 +61,22 @@
   </div>
 </form>
 
-</body>
+<form class="search-zip">
+  <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+</form>
+<ul>
+  {{#each event in events}}
+    <li>
+      <div class="ev-display">
+        <p>{{event.name}}</p>
+        <p>{{event.date}}, {{event.time}}</p>
+        <p>{{event.description}}</p>
+        <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
+        <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+      </div>
+  </li>
+  {{/each}}
+</ul>
 
+
+</body>
