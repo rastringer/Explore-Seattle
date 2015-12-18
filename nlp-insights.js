@@ -71,7 +71,7 @@ if (Meteor.isClient) {
 
   Template.body.events({
       "submit .search-zip": function (event) {
-        // Prevent default browser form submit
+         //Prevent default browser form submit
         event.preventDefault();
 
         // Get value from form element
@@ -95,35 +95,36 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-/*  Meteor.publish('eventData', function(zipNum){
+  Meteor.publish('eventData', function(zipNum){
     console.log("Zipnum is" + zipNum);
     return Events.find({zip: zipNum});
-  });*/
 
- Meteor.methods({
-/*  eventbriteDataGet: function(){
-   this.unblock();
-   return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
-  }*/
+  });
 
-
-  eventfulDataGet: function(){
-   this.unblock();
-   return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB");
-  }
-
-  /*meetupDataGet: function(){
-    this.unblock();
-    return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
-  },*/
-/*  brownPaperTicketDataGet: function(){
-   this.unblock();
-   return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?keywords=wine+story&amp;e_city=Seattle&amp;id=KxsUrh2jzn");
-  }*/
+   //Meteor.methods({
+ /*   eventbriteDataGet: function(){
+     this.unblock();
+     return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
+   }*/
+ //    //don't forget to put comma after each method
+ //
+/*    eventfulDataGet: function(){
+     this.unblock();
+     return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
+   }*/
+ //
+    // meetupDataGet: function(){
+    //   this.unblock();
+    //   return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
+    // }
+ //    brownPaperTicketDataGet: function(){
+ //     this.unblock();
+ //     return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
+ //    }
  });
 
- Meteor.startup(function () {
-    /*Meteor.call("eventbriteDataGet", function(error, result){
+  Meteor.startup(function () {
+ /* Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -157,9 +158,9 @@ if (Meteor.isServer) {
           company_name: "Eventbrite"
         });
       };
-    });
-    */
-   Meteor.call("eventfulDataGet", function(error, result){
+    });*/
+    
+   /*Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
       var events = JSON.parse(result.content);
       var eventData = events.events.event;
@@ -192,31 +193,85 @@ if (Meteor.isServer) {
           company_name: "Eventful"
         })
       }
-    })
- //    Meteor.call("meetupDataGet", function(error, result){
- //      if(error) console.log("The error is " + error);
- //      debugger;
- //
- //      result = JSON.parse(result.content);
- //      var events = result.results;
- //      console.log(events[5]);
- //      for(var i = 0; i < events.length -1; i++){
- //        if(events[i].venue != undefined)
- //        Events.insert({
- //          name: events[i].name,
- //          description: events[i].description,
- //          address: events[i].venue['address_1'],
- //          url: events[i]["event_url"],
- //          city: events[i].venue.city,
- //          state: events[i].venue.state,
- //          zip: events[i].venue.zip,
- //          company_name: "Meetup"
- //        })
- //      }
- //    });
+    })*/
  //
  //    Meteor.call("brownPaperTicketDataGet", function(error, result){
  //     if(error) console.log("The error is " + error);
  //     console.log(result);
-    });
+ //   });
+
+ // Meteor.call("meetupDataGet", function(error, result){
+ //      if(error) console.log("The error is " + error);
+ //      result = JSON.parse(result.content);
+ //      var events = result.results;
+ //       console.log(events);
+ //
+ //      for(var i = 0; i < events.length -1; i++){
+ //
+ //          if(events[i].venue == undefined){
+ //
+ //           var dateTime = new Date(events[i].time);
+ //           var day = dateTime.getDate();
+ //           var month = dateTime.getMonth();
+ //           var year = dateTime.getFullYear();
+ //           var hour = dateTime.getHours();
+ //           var minute = dateTime.getMinutes();
+ //
+ //           var dates = day+ " "+ month + " " + year;
+ //           var minuteBuilder = function(minute){
+ //             if (minute == 0) minute = "00";
+ //
+ //             return  minute;
+ //           }
+ //           var minutes = minuteBuilder(minute);
+ //           var times = hour + ":" + minutes;
+ //
+ //           Events.insert({
+ //             name: events[i].name,
+ //             description: events[i].description,
+ //             time: times,
+ //             date: dates,
+ //             company_name: "Meetup",
+ //             category:[]
+ //           });
+ //
+ //         }
+ //
+ //         if(events[i].venue != undefined){
+ //
+ //           var dateTime = new Date(events[i].time);
+ //           var day = dateTime.getDate();
+ //           var month = dateTime.getMonth();
+ //           var year = dateTime.getFullYear();
+ //           var hour = dateTime.getHours();
+ //           var minute = dateTime.getMinutes();
+ //
+ //          var dates = day+ " "+ month + " " + year;
+ //           var minuteBuilder = function(minute){
+ //             if (minute == 0) minute = "00";
+ //
+ //             return  minute;
+ //           }
+ //           var minutes = minuteBuilder(minute);
+ //           var times = hour + ":" + minutes;
+ //
+ //           Events.insert({
+ //             name: events[i].name,
+ //             description: events[i].description,
+ //             address: events[i].venue['address_1'],
+ //             time: times,
+ //             date: dates,
+ //             url: events[i]["event_url"],
+ //             city: events[i].venue.city,
+ //            state: events[i].venue.state,
+ //            zip: events[i].venue.zip,
+ //           company_name: "Meetup",
+ //           category:[]
+ //          });
+ //        }
+ //        }
+ //    });
+ //
+ //
+  });
 }
