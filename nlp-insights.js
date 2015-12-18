@@ -94,7 +94,6 @@ if (Meteor.isServer) {
     this.unblock();
     return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
   },
-
   brownPaperTicketDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
@@ -106,12 +105,11 @@ if (Meteor.isServer) {
       if(error) console.log("The error is " + error);
       console.log(result.content);
     });*/
-/*    
-   Meteor.call("eventfulDataGet", function(error, result){
+    
+/*   Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
      var events = JSON.parse(result.content);
      var eventData = events.events.event;
-
       for(var i = 0; i < eventData.length -1; i++){
         if(eventData[i].url != undefined)
         Events.insert({
@@ -124,7 +122,7 @@ if (Meteor.isServer) {
           state: eventData[i].region_abbr,
           zip: eventData[i].postal_code,
           company_name: "Eventful"
-        })
+        });
       }
     })*/
     
@@ -149,7 +147,6 @@ if (Meteor.isServer) {
         })
       }
     });
-
    /* Meteor.call("brownPaperTicketDataGet", function(error, result){
      if(error) console.log("The error is " + error);
      console.log(result);
