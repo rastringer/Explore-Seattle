@@ -80,15 +80,16 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
  Meteor.methods({
-  /*eventbriteDataGet: function(){
+  eventbriteDataGet: function(){
    this.unblock();
-   return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=chilling&location.latitude=47.6097&location.longitude=122.3331&location.within=10km&popular=true&token=MO5AQ24HAYLNBP7L5WLE");
-  },
-*/
-  eventfulDataGet: function(){
+   return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
+  }
+  //don't forget to put comma after each method
+
+  /*eventfulDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
-  }
+  }*/
 
   /*meetupDataGet: function(){
     this.unblock();
@@ -101,15 +102,30 @@ if (Meteor.isServer) {
  });
 
  Meteor.startup(function () {
-  /*  Meteor.call("eventbriteDataGet", function(error, result){
-      if(error) console.log("The error is " + error);
-      console.log(result.content);
+    /*Meteor.call("eventbriteDataGet", function(error, result){
+      if(error) console.log("The error is " + error)
+      var events = JSON.parse(result.content);
+      var eventData = events.events;
+      for(var i = 0; i < eventData.length -1; i++){
+        if(eventData[i].url != undefined)
+        Events.insert({
+          name: eventData[i].name.text,
+          description: eventData[i].description.text,
+          address: "Seattle",
+          time: eventData[i].start.local,
+          url: eventData[i].url,
+          city: "Seattle",
+          state: "WA",
+          zip: "98101-98199",
+          company_name: "Eventbrite"
+        });
+      };
     });*/
     
 /*   Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
-     var events = JSON.parse(result.content);
-     var eventData = events.events.event;
+      var events = JSON.parse(result.content);
+      var eventData = events.events.event;
       for(var i = 0; i < eventData.length -1; i++){
         if(eventData[i].url != undefined)
         Events.insert({
