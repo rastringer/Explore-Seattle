@@ -14,12 +14,12 @@ Schemas.Event = new SimpleSchema({
     optional: true
   },
   time: {
-    type: Number,
+    type: String,
     label: "Time",
     optional: true
   },
   date:{
-    type: Number,
+    type: String,
     label: "Date",
     optional: true
 
@@ -46,7 +46,7 @@ Schemas.Event = new SimpleSchema({
     optional: true
   },
   zip:{
-    type: Number,
+    type: String,
     label: "Zip",
     optional: true
 
@@ -55,53 +55,78 @@ Schemas.Event = new SimpleSchema({
     type: String,
     label: "Company_Name",
     optional: true
+  },
+
+  category:{
+    type: [String],
+    label: "Category",
+    optional:true
   }
 });
+
+Meteor.methods({
+
+})
 
 Events.attachSchema(Schemas.Event);
 
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+
+  Template.body.events({
+      "submit .search-zip": function (event) {
+        // Prevent default browser form submit
+        event.preventDefault();
+
+        // Get value from form element
+        var zipNum = event.target.text.value;
+        console.log(zipNum);
+
+        Meteor.subscribe("eventData", zipNum);
+
+        // Clear form
+        event.target.text.value = "";
+      }
+    });
+
+  Template.body.helpers({
+    events: function(text) {
+      return Events.find();
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
 }
 
 if (Meteor.isServer) {
- Meteor.methods({
-  eventbriteDataGet: function(){
-   this.unblock();
-   return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=chilling&location.latitude=47.6097&location.longitude=122.3331&location.within=10km&popular=true&token=MO5AQ24HAYLNBP7L5WLE");
-  },
+  Meteor.publish('eventData', function(zipNum){
+    console.log("Zipnum is" + zipNum);
+    return Events.find({zip: zipNum});
 
-  eventfulDataGet: function(){
-   this.unblock();
-   return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?c=music&l=Seattle&app_key=C5VJScp667pVNMHB&keywords=childish+gambino");
-  },
+  });
 
-  meetupDataGet: function(){
-    this.unblock();
-    return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
-  }
+  Meteor.methods({
+  // eventbriteDataGet: function(){
+  //  this.unblock();
+  //  return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=chilling&location.latitude=47.6097&location.longitude=122.3331&location.within=10km&popular=true&token=MO5AQ24HAYLNBP7L5WLE");
+  // },
+  //
+  // eventfulDataGet: function(){
+  //  this.unblock();
+  //  return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?c=music&l=Seattle&app_key=C5VJScp667pVNMHB&keywords=childish+gambino");
+  // },
 
-  brownPaperTicketDataGet: function(){
-   this.unblock();
-   return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
-  }
+  // meetupDataGet: function(){
+  //   this.unblock();
+  //   return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98122&key=595675274d4211175b522771323d075");
+  // },
+
+  // brownPaperTicketDataGet: function(){
+  //  this.unblock();
+  //  return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
+  // }
  });
 
- Meteor.startup(function () {
+  Meteor.startup(function () {
     // Meteor.call("eventbriteDataGet", function(error, result){
     //   if(error) console.log("The error is " + error);
     //   console.log(result.content);
@@ -111,26 +136,75 @@ if (Meteor.isServer) {
     //   if(error) console.log("The error is " + error);
     //   console.log(result.body);
     // });
-    //
+
     // Meteor.call("meetupDataGet", function(error, result){
     //   if(error) console.log("The error is " + error);
-    //   debugger;
     //
     //   result = JSON.parse(result.content);
     //   var events = result.results;
-    //   console.log(events);
+    //
     //   for(var i = 0; i < events.length -1; i++){
-    //     if(events[i].venue != undefined)
-    //     Events.insert({
-    //       name: events[i].name,
-    //       description: events[i].description,
-    //       address: events[i].venue['address_1'],
-    //       url: events[i]["event_url"],
-    //       city: events[i].venue.city,
-    //       state: events[i].venue.state,
-    //       zip: events[i].venue.zip,
-    //       company_name: "Meetup"
-    //     })
+    //     if(events[i].venue == undefined){
+    //
+    //       var dateTime = new Date(events[i].time);
+    //       var day = dateTime.getDate();
+    //       var month = dateTime.getMonth();
+    //       var year = dateTime.getFullYear();
+    //       var hour = dateTime.getHours();
+    //       var minute = dateTime.getMinutes();
+    //
+    //       var dates = day+ " "+ month + " " + year;
+    //       var minuteBuilder = function(minute){
+    //         if (minute == 0) minute = "00";
+    //
+    //         return  minute;
+    //       }
+    //       var minutes = minuteBuilder(minute);
+    //       var times = hour + ":" + minutes;
+    //
+    //       Events.insert({
+    //         name: events[i].name,
+    //         description: events[i].description,
+    //         time: times,
+    //         date: dates,
+    //         company_name: "Meetup",
+    //         category:[]
+    //       });
+    //
+    //     }
+    //
+    //     if(events[i].venue != undefined){
+    //
+    //       var dateTime = new Date(events[i].time);
+    //       var day = dateTime.getDate();
+    //       var month = dateTime.getMonth();
+    //       var year = dateTime.getFullYear();
+    //       var hour = dateTime.getHours();
+    //       var minute = dateTime.getMinutes();
+    //
+    //       var dates = day+ " "+ month + " " + year;
+    //       var minuteBuilder = function(minute){
+    //         if (minute == 0) minute = "00";
+    //
+    //         return  minute;
+    //       }
+    //       var minutes = minuteBuilder(minute);
+    //       var times = hour + ":" + minutes;
+    //
+    //       Events.insert({
+    //         name: events[i].name,
+    //         description: events[i].description,
+    //         address: events[i].venue['address_1'],
+    //         time: times,
+    //         date: dates,
+    //         url: events[i]["event_url"],
+    //         city: events[i].venue.city,
+    //         state: events[i].venue.state,
+    //         zip: events[i].venue.zip,
+    //         company_name: "Meetup",
+    //         category:[]
+    //       });
+    //     }
     //   }
     // });
 

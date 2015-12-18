@@ -42,10 +42,25 @@ template {
   margin: auto;
 }
 
-.search{
+.search-zip{
   text-align: center;
   padding-top: 20px;
   margin: auto;
   width: 50%;
 }
 
+ul{
+  list-style-type: none;
+  text-align: center;
+}
+
+li{
+  display: inline-block;
+  width: 40%;
+  margin: 1em;
+  border-style: solid;
+  border-width: 2px;
+  background-color: white;
+  font: black;
+  float: left;
+}
