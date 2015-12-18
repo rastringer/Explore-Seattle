@@ -79,17 +79,17 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
- Meteor.methods({
-/*  eventbriteDataGet: function(){
+/* Meteor.methods({
+  eventbriteDataGet: function(){
    this.unblock();
-   return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
-  }*/
-  //don't forget to put comma after each method
+   return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
+  }, */
+
 
 /*  eventfulDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB");
-  }*/
+  },*/
 
   /*meetupDataGet: function(){
     this.unblock();
@@ -101,8 +101,8 @@ if (Meteor.isServer) {
   }*/
  });
 
- Meteor.startup(function () {
-   /* Meteor.call("eventbriteDataGet", function(error, result){
+ /*Meteor.startup(function () {
+    Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -114,7 +114,6 @@ if (Meteor.isServer) {
           var year = dateTime.getFullYear();
           var hour = dateTime.getHours();
           var minute = dateTime.getMinutes();
-          console.log(month);
           var dates = day + " "+ month + " " + year;
           var minuteBuilder = function(minute){
             if (minute == 0) minute = "00";
