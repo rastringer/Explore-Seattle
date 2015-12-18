@@ -14,7 +14,7 @@ Schemas.Event = new SimpleSchema({
     optional: true
   },
   time: {
-    type: Number,
+    type: String,
     label: "Time",
     optional: true
   },
@@ -80,64 +80,80 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
  Meteor.methods({
-  eventbriteDataGet: function(){
+  /*eventbriteDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=chilling&location.latitude=47.6097&location.longitude=122.3331&location.within=10km&popular=true&token=MO5AQ24HAYLNBP7L5WLE");
   },
-
+*/
   eventfulDataGet: function(){
    this.unblock();
-   return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?c=music&l=Seattle&app_key=C5VJScp667pVNMHB&keywords=childish+gambino");
-  },
+   return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
+  }
 
-  meetupDataGet: function(){
+  /*meetupDataGet: function(){
     this.unblock();
     return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
-  }
+  },
 
   brownPaperTicketDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
-  }
+  }*/
  });
 
  Meteor.startup(function () {
-    // Meteor.call("eventbriteDataGet", function(error, result){
-    //   if(error) console.log("The error is " + error);
-    //   console.log(result.content);
-    // });
-    //
-    // Meteor.call("eventfulDataGet", function(error, result){
-    //   if(error) console.log("The error is " + error);
-    //   console.log(result.body);
-    // });
-    //
-    // Meteor.call("meetupDataGet", function(error, result){
-    //   if(error) console.log("The error is " + error);
-    //   debugger;
-    //
-    //   result = JSON.parse(result.content);
-    //   var events = result.results;
-    //   console.log(events);
-    //   for(var i = 0; i < events.length -1; i++){
-    //     if(events[i].venue != undefined)
-    //     Events.insert({
-    //       name: events[i].name,
-    //       description: events[i].description,
-    //       address: events[i].venue['address_1'],
-    //       url: events[i]["event_url"],
-    //       city: events[i].venue.city,
-    //       state: events[i].venue.state,
-    //       zip: events[i].venue.zip,
-    //       company_name: "Meetup"
-    //     })
-    //   }
-    // });
+  /*  Meteor.call("eventbriteDataGet", function(error, result){
+      if(error) console.log("The error is " + error);
+      console.log(result.content);
+    });*/
+/*    
+   Meteor.call("eventfulDataGet", function(error, result){
+      if(error) console.log("The error is " + error);
+     var events = JSON.parse(result.content);
+     var eventData = events.events.event;
 
-   //  Meteor.call("brownPaperTicketDataGet", function(error, result){
-   //   if(error) console.log("The error is " + error);
-   //   console.log(result);
-   // });
+      for(var i = 0; i < eventData.length -1; i++){
+        if(eventData[i].url != undefined)
+        Events.insert({
+          name: eventData[i].title,
+          description: eventData[i].description,
+          address: eventData[i].venue_address,
+          time: eventData[i].start_time,
+          url: eventData[i].venue_url,
+          city: eventData[i].city_name,
+          state: eventData[i].region_abbr,
+          zip: eventData[i].postal_code,
+          company_name: "Eventful"
+        })
+      }
+    })*/
+    
+    /*Meteor.call("meetupDataGet", function(error, result){
+      if(error) console.log("The error is " + error);
+      debugger;
+    
+      result = JSON.parse(result.content);
+      var events = result.results;
+      console.log(events[5]);
+      for(var i = 0; i < events.length -1; i++){
+        if(events[i].venue != undefined)
+        Events.insert({
+          name: events[i].name,
+          description: events[i].description,
+          address: events[i].venue['address_1'],
+          url: events[i]["event_url"],
+          city: events[i].venue.city,
+          state: events[i].venue.state,
+          zip: events[i].venue.zip,
+          company_name: "Meetup"
+        })
+      }
+    });
 
+   /* Meteor.call("brownPaperTicketDataGet", function(error, result){
+     if(error) console.log("The error is " + error);
+     console.log(result);
+   });
+*/
  });
 }
