@@ -233,6 +233,7 @@ if (Meteor.isServer) {
     }); //finish meetup
   })
   }
+  callAPI(); //we call this function only once, then all job does synced-cron
 //you can comment the code below for now
 SyncedCron.add({
     name: 'Update db every 24 hr',
@@ -247,7 +248,9 @@ SyncedCron.add({
         Events.remove({});
         callAPI();
       }
-   });
+   }
+  })
+
 // Start Cronjobs
   SyncedCron.start();
 }
