@@ -238,13 +238,16 @@ SyncedCron.add({
     name: 'Update db every 24 hr',
     schedule: function(parser) {
       // parser is a later.parse object
-      return parser.text('every 2 minutes'); //2 min only for testing. Then replace to "24 hours"
+      return parser.text('every 1 hour'); //you can replace this value by minutes for testing
     }, 
     job: function() {
-      Events.remove({});
-      callAPI();
-    }
-  });
+      var dateTime = new Date();
+      var hour = dateTime.getHours();
+      if (hour=="00") {
+        Events.remove({});
+        callAPI();
+      }
+   });
 // Start Cronjobs
-SyncedCron.start();
+  SyncedCron.start();
 }
