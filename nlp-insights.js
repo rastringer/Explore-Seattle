@@ -118,8 +118,10 @@ if (Meteor.isServer) {
     }
  });
 
+
+  function callAPI () {
   Meteor.startup(function () {
-  Meteor.call("eventbriteDataGet", function(error, result){
+ /* Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -153,7 +155,7 @@ if (Meteor.isServer) {
           company_name: "Eventbrite"
         });
       };
-    });
+    });*/
     
    Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
@@ -187,6 +189,7 @@ if (Meteor.isServer) {
           category: [],
           company_name: "Eventful"
         })
+
       }
     })
 
@@ -207,7 +210,6 @@ if (Meteor.isServer) {
           var dates = day+ " "+ month + " " + year;
            var minuteBuilder = function(minute){
              if (minute == 0) minute = "00";
- 
              return  minute;
            }
            var minutes = minuteBuilder(minute);
@@ -228,6 +230,12 @@ if (Meteor.isServer) {
           });
         }
       }
-    });
-  });
+    }); //finish meetup
+  })
+  }
+  Meteor.setInterval (function () {
+    console.log('updating');
+    Events.remove({});
+     callAPI(); 
+  }, 120000) // change to 86400000
 }
