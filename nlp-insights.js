@@ -233,7 +233,7 @@ if (Meteor.isServer) {
     }); //finish meetup
   })
   }
-
+//you can comment the code below for now
 SyncedCron.add({
     name: 'Update db every 24 hr',
     schedule: function(parser) {
