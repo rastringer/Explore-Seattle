@@ -10,42 +10,24 @@
    
 </form>
  </div>
-
- <!--<ul>
-  {{#each event in events}}
-    <li>
-      <div class="ev-display">
-        <p>{{event.name}}</p>
-        <p>{{event.date}}, {{event.time}}</p>
-        <p>{{event.description}}</p>
-        <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
-        <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+          
+  <ul>
+    {{#each event in events}}
+    <div class="square">
+      <div class="content">
+        <div class="table">
+          <div class="table-cell">
+            <p>{{event.name}}</p>
+            <p>{{event.date}}, {{event.time}}</p>
+            <!-- <p>{{event.description}}</p>-->
+            <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
+            <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+          </div>
+        </div>
       </div>
-  </li>
-  {{/each}}
-  </ul>-->
-
-  
-              
-                      <ul>
-                       {{#each event in events}}
-                        
-                        <div class="square">
-                  <div class="content">
-                    <div class="table">
-                      <div class="table-cell">
-                          <p>{{event.name}}</p>
-                          <p>{{event.date}}, {{event.time}}</p>
-                         <!-- <p>{{event.description}}</p>-->
-                          <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
-                          <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-                        
-                          {{/each}}
-                          </ul>
+    </div>
+    {{/each}}
+  </ul>
                   
               
 
