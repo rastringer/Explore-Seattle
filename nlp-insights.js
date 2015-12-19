@@ -121,7 +121,7 @@ if (Meteor.isServer) {
 
   function callAPI () {
   Meteor.startup(function () {
- /* Meteor.call("eventbriteDataGet", function(error, result){
+  Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -155,7 +155,7 @@ if (Meteor.isServer) {
           company_name: "Eventbrite"
         });
       };
-    });*/
+    });
     
    Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
@@ -233,10 +233,7 @@ if (Meteor.isServer) {
     }); //finish meetup
   })
   }
-  /*Meteor.setInterval (function () {
-    Events.remove({});
-     callAPI(); 
-  }, 120000) // change to 86400000*/
+
 SyncedCron.add({
     name: 'Update db every 24 hr',
     schedule: function(parser) {
