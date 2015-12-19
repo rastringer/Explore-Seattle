@@ -9,10 +9,9 @@
   <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
    
 </form>
-
-
  </div>
- <ul>
+
+ <!--<ul>
   {{#each event in events}}
     <li>
       <div class="ev-display">
@@ -24,7 +23,33 @@
       </div>
   </li>
   {{/each}}
-</ul>
+  </ul>-->
+
+  
+              
+                      <ul>
+                       {{#each event in events}}
+                        
+                        <div class="square">
+                  <div class="content">
+                    <div class="table">
+                      <div class="table-cell">
+                          <p>{{event.name}}</p>
+                          <p>{{event.date}}, {{event.time}}</p>
+                         <!-- <p>{{event.description}}</p>-->
+                          <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
+                          <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+                        
+                          {{/each}}
+                          </ul>
+                  
+              
+
+
 <!--http://cdn2.landscapehdwalls.com/wallpapers/1/mountaintop-road-301-2560x1600.jpg!
 http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg-->
 <!--   <nav aria-label="You are here:" role="navigation">
