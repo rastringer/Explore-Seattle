@@ -1,11 +1,33 @@
 <head>
   <title>nlp-insights</title>
-   <link href="https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlJbPFduIYtoLzwST68uhz_Y.woff2" rel='stylesheet' type='text/css'>
-</head>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'></head>
 
 <body>
+<div id = "background">
+    <h1>What would you like to do today?</h1>
+    <form class="search-zip">
+  <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+   
+</form>
 
-  <nav aria-label="You are here:" role="navigation">
+
+ </div>
+ <ul>
+  {{#each event in events}}
+    <li>
+      <div class="ev-display">
+        <p>{{event.name}}</p>
+        <p>{{event.date}}, {{event.time}}</p>
+        <p>{{event.description}}</p>
+        <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
+        <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+      </div>
+  </li>
+  {{/each}}
+</ul>
+<!--http://cdn2.landscapehdwalls.com/wallpapers/1/mountaintop-road-301-2560x1600.jpg!
+http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg-->
+<!--   <nav aria-label="You are here:" role="navigation">
   <ul class="breadcrumbs">
     <li><a href="#">Home</a></li>
     <li><a href="#">Features</a></li>
@@ -14,14 +36,13 @@
       <span class="show-for-sr">Current: </span> About us
     </li>
   </ul>
-</nav>
-  <header>
+</nav> -->
+<!--   <header>
     <h1>What would you like to do today?</h1>
-  </header>
+  </header> -->
 
 
-
-<label class="search">
+<!-- <label class="search">
       <input type="text" placeholder="Music, arts, sport, family events, or nightlife">
         </label>
 
@@ -59,10 +80,11 @@
     <input class="input-group-field" type="url">
     <a class="input-group-button button">Submit</a>
   </div>
-</form>
+</form> -->
 
-<form class="search-zip">
+<!-- <form class="search-zip">
   <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+   <input type="text" name="date" placeholder="Choose a date">
 </form>
 <ul>
   {{#each event in events}}
@@ -76,7 +98,7 @@
       </div>
   </li>
   {{/each}}
-</ul>
+</ul> -->
 
 
 </body>
