@@ -233,9 +233,21 @@ if (Meteor.isServer) {
     }); //finish meetup
   })
   }
-  Meteor.setInterval (function () {
-    console.log('updating');
+  /*Meteor.setInterval (function () {
     Events.remove({});
      callAPI(); 
-  }, 120000) // change to 86400000
+  }, 120000) // change to 86400000*/
+SyncedCron.add({
+    name: 'Update db every 24 hr',
+    schedule: function(parser) {
+      // parser is a later.parse object
+      return parser.text('every 2 minutes'); //2 min only for testing. Then replace to "24 hours"
+    }, 
+    job: function() {
+      Events.remove({});
+      callAPI();
+    }
+  });
+// Start Cronjobs
+SyncedCron.start();
 }
