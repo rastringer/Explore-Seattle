@@ -90,7 +90,6 @@ if (Meteor.isClient) {
       return Events.find();
     }
   });
-
 }
 
 if (Meteor.isServer) {
@@ -101,30 +100,28 @@ if (Meteor.isServer) {
 
   });
 
-   //Meteor.methods({
- /*   eventbriteDataGet: function(){
+   Meteor.methods({
+    eventbriteDataGet: function(){
      this.unblock();
      return Meteor.http.call("GET", "https://www.eventbriteapi.com/v3/events/search/?q=music&location.address=Seattle&token=MO5AQ24HAYLNBP7L5WLE");
-   }*/
+   },
  //    //don't forget to put comma after each method
  //
-/*    eventfulDataGet: function(){
+    eventfulDataGet: function(){
      this.unblock();
      return Meteor.http.call("GET", "http://api.eventful.com/json/events/search?l=Seattle&app_key=C5VJScp667pVNMHB&keywords=story+time+evening+music");
-   }*/
- //
-    // meetupDataGet: function(){
-    //   this.unblock();
-    //   return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
-    // }
- //    brownPaperTicketDataGet: function(){
- //     this.unblock();
- //     return Meteor.http.call("GET", "https://www.brownpapertickets.com/api2/eventlist/?id=KxsUrh2jzn");
- //    }
- //});
+   },
+ 
+    meetupDataGet: function(){
+      this.unblock();
+      return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
+    }
+ });
 
-  //Meteor.startup(function () {
- /* Meteor.call("eventbriteDataGet", function(error, result){
+
+  function callAPI () {
+  Meteor.startup(function () {
+  Meteor.call("eventbriteDataGet", function(error, result){
       if(error) console.log("The error is " + error)
       var events = JSON.parse(result.content);
       var eventData = events.events;
@@ -158,9 +155,9 @@ if (Meteor.isServer) {
           company_name: "Eventbrite"
         });
       };
-    });*/
+    });
     
-   /*Meteor.call("eventfulDataGet", function(error, result){
+   Meteor.call("eventfulDataGet", function(error, result){
       if(error) console.log("The error is " + error);
       var events = JSON.parse(result.content);
       var eventData = events.events.event;
@@ -192,84 +189,65 @@ if (Meteor.isServer) {
           category: [],
           company_name: "Eventful"
         })
-      }
-    })*/
- //
- //    Meteor.call("brownPaperTicketDataGet", function(error, result){
- //     if(error) console.log("The error is " + error);
- //     console.log(result);
- //   });
 
- // Meteor.call("meetupDataGet", function(error, result){
- //      if(error) console.log("The error is " + error);
- //      result = JSON.parse(result.content);
- //      var events = result.results;
- //       console.log(events);
- //
- //      for(var i = 0; i < events.length -1; i++){
- //
- //          if(events[i].venue == undefined){
- //
- //           var dateTime = new Date(events[i].time);
- //           var day = dateTime.getDate();
- //           var month = dateTime.getMonth();
- //           var year = dateTime.getFullYear();
- //           var hour = dateTime.getHours();
- //           var minute = dateTime.getMinutes();
- //
- //           var dates = day+ " "+ month + " " + year;
- //           var minuteBuilder = function(minute){
- //             if (minute == 0) minute = "00";
- //
- //             return  minute;
- //           }
- //           var minutes = minuteBuilder(minute);
- //           var times = hour + ":" + minutes;
- //
- //           Events.insert({
- //             name: events[i].name,
- //             description: events[i].description,
- //             time: times,
- //             date: dates,
- //             company_name: "Meetup",
- //             category:[]
- //           });
- //
- //         }
- //
- //         if(events[i].venue != undefined){
- //
- //           var dateTime = new Date(events[i].time);
- //           var day = dateTime.getDate();
- //           var month = dateTime.getMonth();
- //           var year = dateTime.getFullYear();
- //           var hour = dateTime.getHours();
- //           var minute = dateTime.getMinutes();
- //
- //          var dates = day+ " "+ month + " " + year;
- //           var minuteBuilder = function(minute){
- //             if (minute == 0) minute = "00";
- //
- //             return  minute;
- //           }
- //           var minutes = minuteBuilder(minute);
- //           var times = hour + ":" + minutes;
- //
- //           Events.insert({
- //             name: events[i].name,
- //             description: events[i].description,
- //             address: events[i].venue['address_1'],
- //             time: times,
- //             date: dates,
- //             url: events[i]["event_url"],
- //             city: events[i].venue.city,
- //            state: events[i].venue.state,
- //            zip: events[i].venue.zip,
- //           company_name: "Meetup",
- //           category:[]
- //          });
- //        }
- //        }
- //    });
- // });
+      }
+    })
+
+
+ Meteor.call("meetupDataGet", function(error, result){
+      if(error) console.log("The error is " + error);
+      result = JSON.parse(result.content);
+      var events = result.results;
+      for(var i = 0; i < events.length -1; i++){
+         if(events[i].venue != undefined){
+           var dateTime = new Date(events[i].time);
+           var day = dateTime.getDate();
+           var month = dateTime.getMonth();
+           var year = dateTime.getFullYear();
+           var hour = dateTime.getHours();
+           var minute = dateTime.getMinutes();
+ 
+          var dates = day+ " "+ month + " " + year;
+           var minuteBuilder = function(minute){
+             if (minute == 0) minute = "00";
+             return  minute;
+           }
+           var minutes = minuteBuilder(minute);
+           var times = hour + ":" + minutes;
+ 
+           Events.insert({
+             name: events[i].name,
+             description: events[i].description,
+             address: events[i].venue['address_1'],
+             time: times,
+             date: dates,
+             url: events[i]["event_url"],
+             city: events[i].venue.city,
+            state: events[i].venue.state,
+            zip: events[i].venue.zip,
+           company_name: "Meetup",
+           category:[]
+          });
+        }
+      }
+    }); //finish meetup
+  })
+  }
+//you can comment the code below for now
+SyncedCron.add({
+    name: 'Update db every 24 hr',
+    schedule: function(parser) {
+      // parser is a later.parse object
+      return parser.text('every 1 hour'); //you can replace this value by minutes for testing
+    }, 
+    job: function() {
+      var dateTime = new Date();
+      var hour = dateTime.getHours();
+      if (hour=="00") {
+        Events.remove({});
+        callAPI();
+      }
+   });
+// Start Cronjobs
+  SyncedCron.start();
 }
