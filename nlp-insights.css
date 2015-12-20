@@ -4,9 +4,7 @@
 
 
 html {
-  font-family: 'Source Sans Pro';
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+font-family: 'Roboto', sans-serif; 
 }
 body {
   margin: 0;
@@ -62,9 +60,20 @@ template {
   background: white;
   height: 15rem;
   vertical-align: top; 
+  cursor: pointer;
 }
 
+
 .content {
+
   text-align: left;
+  padding: 25px 7px 7px 7px;
+}
+.content #title {
+  font-family: 'Roboto', sans-serif;
+  color: #333333;
+  word-break: break-word;
+  width: 100%;
+  line-height: 20px;
 }
 
