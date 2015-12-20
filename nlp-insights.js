@@ -248,7 +248,7 @@ if (Meteor.isServer) {
       });
 
 
-      Meteor.call("strangerDataGet", function(error, result){
+     /* Meteor.call("strangerDataGet", function(error, result){
            if(error) console.log("The StrangerDataGet error is " + error)
            console.log("new stranger data coming");
 
@@ -293,11 +293,12 @@ if (Meteor.isServer) {
              });
            };
         //end stranger call
-         });
+         });*/
   };
 
+
 //we call this function only once, then all job does synced-cron
-  // callAPI();
+   callAPI();
 
 // calls callAPI() and adds synced-cron
 // SyncedCron.add({
