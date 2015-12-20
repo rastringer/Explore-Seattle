@@ -3,7 +3,8 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'></head>
 <body>
 <div id = "background">
-    <h1>What would you like to do today?</h1>
+   <span class = "title">What would you like to do today?</span>
+
     <form class="search-zip">
   <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
    
@@ -14,11 +15,13 @@
     {{#each event in events}}
    
     <li>
+    <div class = "content">
       <p>{{event.name}}</p>
       <p>{{event.date}}, {{event.time}}</p>
       <!-- <p>{{event.description}}</p>-->
       <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
       <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+      </div>
      </li>
     {{/each}}
   </ul>

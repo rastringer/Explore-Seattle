@@ -159,9 +159,10 @@ if (Meteor.isServer) {
             }
             var minutes = minuteBuilder(minute);
             var times = hour + ":" + minutes;
-
+            var titleToLowerCase = eventData[i].name.text.toLowerCase(); 
+            var title = titleToLowerCase.charAt(0).toUpperCase() + titleToLowerCase.slice(1);
           Events.insert({
-            name: eventData[i].name.text,
+            name: title,
             description: eventData[i].description.text,
             address: "Seattle",
             time: times,
@@ -173,6 +174,7 @@ if (Meteor.isServer) {
             category: [],
             company_name: "Eventbrite"
           });
+          
         };
       });
 

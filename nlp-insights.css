@@ -27,32 +27,15 @@ body {
     padding-top: 40px;
     text-align: center;
 }
- h1 {
-    color: #F0FFFF;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-h1,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-  display: block;
-}
- h1 {
+
+
+ .title {
   font-family: 'Source Sans Pro';
-  font-weight: 400;
+  font-weight: 300;
   color: #F5FFFA;
   padding-top: 60px;
   text-align: center;
-  font-size: 35px
+  font-size: 38px;
 }
 
 template {
@@ -81,4 +64,7 @@ template {
   vertical-align: top; 
 }
 
+.content {
+  text-align: left;
+}
 
