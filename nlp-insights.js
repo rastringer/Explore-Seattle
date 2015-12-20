@@ -78,7 +78,12 @@ Events.attachSchema(Schemas.Event);
 
 if (Meteor.isClient) {
 
-
+ $(document).foundation({
+  equalizer : {
+    // Specify if Equalizer should make elements equal height once they become stacked.
+    equalize_on_stack: true
+  }
+});
   Template.body.events({
       "submit .search-zip": function (event) {
          //Prevent default browser form submit
@@ -207,7 +212,7 @@ if (Meteor.isServer) {
         }
       });
 
-
+/*
    Meteor.call("meetupDataGet", function(error, result){
         if(error) console.log("The error is " + error);
         result = JSON.parse(result.content);
@@ -245,7 +250,7 @@ if (Meteor.isServer) {
           }
         }
         //finish meetup
-      });
+      });*/
 
 
      /* Meteor.call("strangerDataGet", function(error, result){
