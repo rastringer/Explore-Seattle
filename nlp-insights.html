@@ -1,102 +1,123 @@
 <head>
   <title>nlp-insights</title>
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'></head>
-<body>
-<div id = "background">
-    <h1>What would you like to do today?</h1>
-    <form class="search-zip">
-  <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
-   
-</form>
- </div>
-         
-  <ul class="large-block-grid-5 medium-block-grid-3 small-block-grid-1 text-center">
-    {{#each event in events}}
-   
-    <li>
-      <p>{{event.name}}</p>
-      <p>{{event.date}}, {{event.time}}</p>
-      <!-- <p>{{event.description}}</p>-->
-      <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
-      <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
-     </li>
-    {{/each}}
-  </ul>
-                  
-            
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+</head>
 
-<!--http://cdn2.landscapehdwalls.com/wallpapers/1/mountaintop-road-301-2560x1600.jpg!
-http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg-->
-<!--   <nav aria-label="You are here:" role="navigation">
-  <ul class="breadcrumbs">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Features</a></li>
-    <li class="disabled">GitHub</li>
-    <li>
-      <span class="show-for-sr">Current: </span> About us
-    </li>
-  </ul>
-</nav> -->
-<!--   <header>
-    <h1>What would you like to do today?</h1>
-  </header> -->
+<template name="main">
+    <!-- <nav aria-label="You are here:" role="navigation">{{> about}}</nav> -->
+    <h2>HAWK EYE!!</h2>
+    {{> navigation}}
+    {{> yield}}
+</template>
 
+<template name="home">
+  <body>
 
-<!-- <label class="search">
-      <input type="text" placeholder="Music, arts, sport, family events, or nightlife">
-        </label>
-<form class="categories">
-  <label>Input Label
-    <input type="text" placeholder=".small-12.columns" aria-describedby="exampleHelpText">
-  </label>
-  <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
-  <label>
-    How many puppies?
-    <input type="number" value="100">
-  </label>
-  <label>
-    What books did you read over summer break?
-    <textarea placeholder="None"></textarea>
-  </label>
-  <label>Select Menu
-    <select>
-      <option value="husker">Husker</option>
-      <option value="starbuck">Starbuck</option>
-      <option value="hotdog">Hot Dog</option>
-      <option value="apollo">Apollo</option>
-    </select>
-  </label>
-  <div class="row">
+  <div id = "background">
+      <h1>What would you like to do today?</h1>
+      <form class="search-zip">
+        <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+      </form>
   </div>
-  <div class="row">
-    <div class="small-3 columns">
-      <label for="middle-label" class="right middle">Label</label>
+
+  {{> lists}}
+
+  <!--http://cdn2.landscapehdwalls.com/wallpapers/1/mountaintop-road-301-2560x1600.jpg!
+  http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg-->
+  <!--   <nav aria-label="You are here:" role="navigation">
+    <ul class="breadcrumbs">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Features</a></li>
+      <li class="disabled">GitHub</li>
+      <li>
+        <span class="show-for-sr">Current: </span> About us
+      </li>
+    </ul>
+  </nav> -->
+  <!--   <header>
+      <h1>What would you like to do today?</h1>
+    </header> -->
+
+
+  <!-- <label class="search">
+        <input type="text" placeholder="Music, arts, sport, family events, or nightlife">
+          </label>
+  <form class="categories">
+    <label>Input Label
+      <input type="text" placeholder=".small-12.columns" aria-describedby="exampleHelpText">
+    </label>
+    <p class="help-text" id="exampleHelpText">Here's how you use this input field!</p>
+    <label>
+      How many puppies?
+      <input type="number" value="100">
+    </label>
+    <label>
+      What books did you read over summer break?
+      <textarea placeholder="None"></textarea>
+    </label>
+    <label>Select Menu
+      <select>
+        <option value="husker">Husker</option>
+        <option value="starbuck">Starbuck</option>
+        <option value="hotdog">Hot Dog</option>
+        <option value="apollo">Apollo</option>
+      </select>
+    </label>
+    <div class="row">
     </div>
-  </div>
-  <div class="input-group">
-    <span class="input-group-label">$</span>
-    <input class="input-group-field" type="url">
-    <a class="input-group-button button">Submit</a>
-  </div>
-</form> -->
-
-<!-- <form class="search-zip">
-  <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
-   <input type="text" name="date" placeholder="Choose a date">
-</form>
-<ul>
-  {{#each event in events}}
-    <li>
-      <div class="ev-display">
-        <p>{{event.name}}</p>
-        <p>{{event.date}}, {{event.time}}</p>
-        <p>{{event.description}}</p>
-        <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
-        <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+    <div class="row">
+      <div class="small-3 columns">
+        <label for="middle-label" class="right middle">Label</label>
       </div>
-  </li>
-  {{/each}}
-</ul> -->
+    </div>
+    <div class="input-group">
+      <span class="input-group-label">$</span>
+      <input class="input-group-field" type="url">
+      <a class="input-group-button button">Submit</a>
+    </div>
+  </form> -->
 
+  <!-- <form class="search-zip">
+    <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+     <input type="text" name="date" placeholder="Choose a date">
+  </form>
+  <ul>
+    {{#each event in events}}
+      <li>
+        <div class="ev-display">
+          <p>{{event.name}}</p>
+          <p>{{event.date}}, {{event.time}}</p>
+          <p>{{event.description}}</p>
+          <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
+          <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+        </div>
+    </li>
+    {{/each}}
+  </ul> -->
 
 </body>
+
+</template>
+
+<template name="navigation">
+    <ul class="breadcrumbs">
+        <li data-template="home" role="presentation" class="active"><a href="{{pathFor route='home'}}">Home</a></li>
+        <li data-template="features" role="presentation"><a href="{{pathFor route='features'}}">Features</a></li>
+        <li data-template="about" role="presentation"><a href="{{pathFor route='about'}}">About us</a></li>
+    </ul>
+</template>
+
+<template name="lists">
+  <ul class="large-block-grid-5 medium-block-grid-3 small-block-grid-1 text-center">
+      {{#each event in events}}
+
+      <li>
+        <p>{{event.name}}</p>
+        <p>{{event.date}}, {{event.time}}</p>
+        <!-- <p>{{event.description}}</p>-->
+        <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
+        <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+       </li>
+      {{/each}}
+    </ul>
+</template>

@@ -1,3 +1,16 @@
+Router.route('/', {
+  name: 'home',
+  template: 'home'
+});
+
+Router.route('/about');
+
+Router.route('/features');
+
+Router.configure({
+  layoutTemplate: 'main'
+});
+
 Events = new Mongo.Collection('events');
 
 var Schemas = {};
@@ -78,13 +91,14 @@ Events.attachSchema(Schemas.Event);
 
 if (Meteor.isClient) {
 
- $(document).foundation({
-  equalizer : {
-    // Specify if Equalizer should make elements equal height once they become stacked.
-    equalize_on_stack: true
-  }
-});
-  Template.body.events({
+  $(document).foundation({
+    equalizer : {
+      // Specify if Equalizer should make elements equal height once they become stacked.
+      equalize_on_stack: true
+    }
+  });
+
+  Template.home.events({
       "submit .search-zip": function (event) {
          //Prevent default browser form submit
         event.preventDefault();
@@ -100,7 +114,7 @@ if (Meteor.isClient) {
       }
     });
 
-  Template.body.helpers({
+  Template.lists.helpers({
     events: function(text) {
       return Events.find();
     }
