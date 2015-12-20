@@ -71,12 +71,14 @@ template {
   font-size: 0;
 }
 [class*="block-grid-"].text-center > li {
+
   margin: 1%;
   float: none;
   display: inline-block;
   background: white;
-  width: 25%;
   height: 18rem;
-  vertical-align: top;
+  vertical-align: top; 
+
+  
 }
 
