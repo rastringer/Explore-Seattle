@@ -1,0 +1,23 @@
+<!-- <template name="about">
+  <h1>Iryna</h1>
+  <h1>Robin</h1>
+  <h1>Tina</h1>
+  <h1>Daniel</h1>
+</template>
+ -->
+
+ <template name="about">
+  <div  id="background">
+  <h3 class="page-header">About Us</h3>
+  <h1>Iryna</h1>
+  <h1>Robin</h1>
+  <h1>Tina</h1>
+  <h1>Daniel</h1>
+
+  <ul class="list-group">
+    {{#each this}}
+      <li class="list-group-item"><strong>{{name}}</strong> by {{creator}}</li>
+    {{/each}}
+  </ul>
+</div>
+</template>

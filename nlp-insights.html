@@ -1,16 +1,31 @@
 <head>
   <title>nlp-insights</title>
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'></head>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+</head>
 
-<body>
-<div id = "background">
+<template name="main">
+    <!-- <nav aria-label="You are here:" role="navigation">{{> about}}</nav> -->
+    <h2>HAWK EYE!!</h2>
+    {{> navigation}}
+    <!-- {{> eventName}} -->
+    {{> yield}}
+
+</template>
+
+<!-- <template name="home">
+  {{> events}}
+</template>
+ -->
+<template name="home">
+  <body>
+
+  <div id = "background">
     <h1>What would you like to do today?</h1>
     <form class="search-zip">
-  <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
-   
-</form>
- </div>
-          
+      <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+    </form>
+  </div>
+
   <ul class="small-block-grid-4">
     {{#each event in events}}
     <li>
@@ -22,11 +37,9 @@
      </li>
     {{/each}}
   </ul>
-                  
-              
 
 
-<!--http://cdn2.landscapehdwalls.com/wallpapers/1/mountaintop-road-301-2560x1600.jpg!
+    <!--http://cdn2.landscapehdwalls.com/wallpapers/1/mountaintop-road-301-2560x1600.jpg!
 http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg-->
 <!--   <nav aria-label="You are here:" role="navigation">
   <ul class="breadcrumbs">
@@ -101,5 +114,15 @@ http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_
   {{/each}}
 </ul> -->
 
-
 </body>
+</template>
+
+<template name="navigation">
+    <ul class="breadcrumbs">
+        <li data-template="home" role="presentation" class="active"><a href="{{pathFor route='home'}}">Home</a></li>
+        <li data-template="features" role="presentation"><a href="{{pathFor route='features'}}">Features</a></li>
+        <li data-template="about" role="presentation"><a href="{{pathFor route='about'}}">About us</a></li>
+    </ul>
+    {{> Template.dynamic template=tab data=tabData}}
+</template>
+
