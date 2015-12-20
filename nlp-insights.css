@@ -67,18 +67,18 @@ template {
   width: 50%;
 }
 
+
 [class*="block-grid-"].text-center {
   font-size: 0;
 }
 [class*="block-grid-"].text-center > li {
 
-  margin: 1%;
+  margin: 0.25rem;
   float: none;
   display: inline-block;
   background: white;
-  height: 18rem;
+  height: 15rem;
   vertical-align: top; 
-
-  
 }
+
 
