@@ -1,5 +1,8 @@
 
 /* CSS declarations go here */
+
+
+
 html {
   font-family: 'Source Sans Pro';
   -webkit-text-size-adjust: 100%;
@@ -64,34 +67,16 @@ template {
   width: 50%;
 }
 
-
-
-.square {
-    float:left;
-    position: relative;
-    width: 30%;
-    padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
-    margin:1.66%;
-    background-color:#1E1E1E;
-    overflow:hidden;
+[class*="block-grid-"].text-center {
+  font-size: 0;
 }
-
-.content {
-    position:absolute;
-    height:90%; /* = 100% - 2*5% padding */
-    width:90%; /* = 100% - 2*5% padding */
-    padding: 5%;
-    
+[class*="block-grid-"].text-center > li {
+  margin: 1%;
+  float: none;
+  display: inline-block;
+  background: white;
+  width: 25%;
+  height: 18rem;
+  vertical-align: top;
 }
-.table{
-    display:table;
-    width:100%;
-    height:100%;
-}
-.table-cell{
-    display:table-cell;
-    vertical-align:middle;
-}
-/*  For list */
-
 

@@ -1,7 +1,6 @@
 <head>
   <title>nlp-insights</title>
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'></head>
-
 <body>
 <div id = "background">
     <h1>What would you like to do today?</h1>
@@ -10,9 +9,10 @@
    
 </form>
  </div>
-          
-  <ul class="small-block-grid-4">
+         
+  <ul class="medium-block-grid-4 small-block-grid-2 large-block-4 text-center">
     {{#each event in events}}
+   
     <li>
             <p>{{event.name}}</p>
             <p>{{event.date}}, {{event.time}}</p>
@@ -20,7 +20,9 @@
             <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
             <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
      </li>
+    
     {{/each}}
+
   </ul>
                   
               
@@ -46,8 +48,6 @@ http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_
 <!-- <label class="search">
       <input type="text" placeholder="Music, arts, sport, family events, or nightlife">
         </label>
-
-
 <form class="categories">
   <label>Input Label
     <input type="text" placeholder=".small-12.columns" aria-describedby="exampleHelpText">
