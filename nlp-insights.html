@@ -11,21 +11,15 @@
 </form>
  </div>
           
-  <ul>
+  <ul class="small-block-grid-4">
     {{#each event in events}}
-    <div class="square">
-      <div class="content">
-        <div class="table">
-          <div class="table-cell">
+    <li>
             <p>{{event.name}}</p>
             <p>{{event.date}}, {{event.time}}</p>
             <!-- <p>{{event.description}}</p>-->
             <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
             <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
+     </li>
     {{/each}}
   </ul>
                   

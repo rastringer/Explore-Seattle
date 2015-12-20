@@ -72,7 +72,7 @@ template {
     width: 30%;
     padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
     margin:1.66%;
-    background-color: white;
+    background-color:#1E1E1E;
     overflow:hidden;
 }
 
@@ -93,15 +93,5 @@ template {
     vertical-align:middle;
 }
 /*  For list */
-ul{
-    text-align:left;
-    margin:5% 0 0;
-    padding:0;
-    list-style-position:inside;
-}
-li{
-    margin: 0 0 0 5%;
-    padding:0;
-}
 
 
