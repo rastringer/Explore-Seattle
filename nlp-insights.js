@@ -7,13 +7,9 @@ Router.route('/about');
 
 Router.route('/features');
 
-Router.route('/eventName');
-
 Router.configure({
   layoutTemplate: 'main'
 });
-
-EventList = new Meteor.Collection('eventLists');
 
 Events = new Mongo.Collection('events');
 
@@ -96,7 +92,7 @@ Events.attachSchema(Schemas.Event);
 if (Meteor.isClient) {
 
 
-  Template.body.events({
+  Template.home.events({
       "submit .search-zip": function (event) {
          //Prevent default browser form submit
         event.preventDefault();
@@ -112,7 +108,7 @@ if (Meteor.isClient) {
       }
     });
 
-  Template.body.helpers({
+  Template.lists.helpers({
     events: function(text) {
       return Events.find();
     }
