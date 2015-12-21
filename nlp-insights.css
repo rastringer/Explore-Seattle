@@ -59,10 +59,9 @@ template {
   cursor: pointer;
 
 }
-li:hover {
-  background: E4E4F2;
+[class*="block-grid-"].text-center > li:hover {
+  background-color: rgb(249, 249, 249)
 }
-
 .content {
   text-align: left;
   padding: 25px 7px 7px 7px;
