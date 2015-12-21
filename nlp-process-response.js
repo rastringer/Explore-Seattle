@@ -1,4 +1,3 @@
-//var text = "I want to go hiking and fish and trekking and walk in nature. Like, or maybe go to a concert. And get drunk, score some drugs, LOL!. Or perhaps take a walk in nature. Or just party all night if a good DJ is playing. Or maybe go to a pantomime. I've only got like four free hours on sunday so maybe then I'll just relax";
 var recommend = function (text) {
   var scores = {
   music : 0,
@@ -36,15 +35,7 @@ var recommend = function (text) {
          }
      return text;
      };
-     tokenize (text)
-
-  // var words = tokenize(text);
-
-  // console.log(scores.music);
-  // console.log(scores.movie);
-  // console.log(scores.family);
-  // console.log(scores.outdoors);
-  // console.log(scores.nightlife);
+     tokenize (text);
 
   var winner = "";
   var count = 0;
@@ -66,7 +57,7 @@ var recommend = function (text) {
 
 //console.log(recommend(text));
 if (Meteor.isClient) {
-   
+
     Template.body.events ({
       /*"submit .recommendedText": function (event) {
          //Prevent default browser form submit
@@ -74,18 +65,18 @@ if (Meteor.isClient) {
 
         // Get value from form element
          var text  = event.target.text.value;
-         
+
 
         //Meteor.subscribe("textFromUser", text);
         // Clear form
-        event.target.text.value = "";  
-       var result = recommend(text) 
+        event.target.text.value = "";
+       var result = recommend(text)
        return result;
       }*/
     });
 
   Template.body.helpers({
-  
+
   });
 }
 
@@ -95,6 +86,6 @@ if (Meteor.isServer) {
     return {text: "bubub"}
     */
 
-  //}); 
- 
+  //});
+
 }
