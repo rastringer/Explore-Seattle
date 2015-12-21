@@ -5,7 +5,7 @@
 
 <template name="main">
     <!-- <nav aria-label="You are here:" role="navigation">{{> about}}</nav> -->
-    <h2>HAWK EYE!!</h2>
+    <h6>Placeholder for app name</h6>
     {{> navigation}}
     {{> yield}}
 </template>
@@ -18,24 +18,24 @@
     <form class="search-zip">
       <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
     </form>
-  </div>    
+  </div>
   {{> lists}}
 
 </body>
 
 </template>
 <template name="navigation">
-    <ul class="breadcrumbs">
+    <ul class="nav">
         <li data-template="home" role="presentation" class="active"><a href="{{pathFor route='home'}}">Home</a></li>
-        <li data-template="features" role="presentation"><a href="{{pathFor route='features'}}">Features</a></li>
-        <li data-template="about" role="presentation"><a href="{{pathFor route='about'}}">About us</a></li>
+        <li data-template="features" role="presentation"  class="active"><a href="{{pathFor route='features'}}">Features</a></li>
+        <li data-template="about" role="presentation" class="active"><a href="{{pathFor route='about'}}">About us</a></li>
     </ul>
 </template>
 <template name="lists">
   <ul class="large-block-grid-5 medium-block-grid-3 small-block-grid-1 text-center">
     {{#each event in events}}
     <li>
-    
+
     <div class = "content">
       <p id = "title">{{event.name}}</p>
       <p class = "details">Date and time:</p>
