@@ -27,9 +27,11 @@ body {
     padding-top: 40px;
     text-align: center;
 }
- h1 {
+/* h1 {
     color: #F0FFFF;
-}
+    font-size: 80px;
+    font-weight: 200px;
+}*/
 article,
 aside,
 details,
@@ -48,11 +50,12 @@ summary {
 }
  h1 {
   font-family: 'Source Sans Pro';
-  font-weight: 400;
+  font-weight: 250;
   color: #F5FFFA;
   padding-top: 60px;
   text-align: center;
-  font-size: 35px
+  font-size: 42px;
+  line-height:32px;
 }
 
 template {
@@ -64,7 +67,7 @@ template {
   text-align: center;
   padding-top: 60px;
   margin: auto;
-  width: 50%;
+  width: 40%;
 }
 
 
@@ -78,7 +81,7 @@ template {
   display: inline-block;
   background: white;
   height: 15rem;
-  vertical-align: top; 
+  vertical-align: top;
 }
 
 
