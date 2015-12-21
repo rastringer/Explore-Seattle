@@ -15,10 +15,12 @@
     <li>
     <div class = "content">
       <p id = "title">{{event.name}}</p>
-      <p>{{event.date}}, {{event.time}}</p>
+      <p class = "details">Date and time:</p>
+      <p class = "data-details">{{event.date}}, {{event.time}}</p>
       <!-- <p>{{event.description}}</p>-->
-      <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
-      <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+      <p class = "details"> Address: </p>
+      <p class = 'data-details'>{{#if event.address_1}}{{event.address_1}}{{else}}Please check link{{/if}}</p>
+      <p><a href={{event.url}}> Open on {{event.company_name}}</a>   </p>
       </div>
      </li>
     {{/each}}
