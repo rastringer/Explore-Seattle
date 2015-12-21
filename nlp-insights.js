@@ -173,7 +173,7 @@ if (Meteor.isServer) {
             }
             var minutes = minuteBuilder(minute);
             var times = hour + ":" + minutes;
-            var titleToLowerCase = eventData[i].name.text.toLowerCase(); 
+            var titleToLowerCase = eventData[i].name.text.toLowerCase();
             var title = titleToLowerCase.charAt(0).toUpperCase() + titleToLowerCase.slice(1);
           Events.insert({
             name: title,
@@ -188,7 +188,7 @@ if (Meteor.isServer) {
             category: [],
             company_name: "Eventbrite"
           });
-          
+
         };
       });
 
@@ -227,6 +227,12 @@ if (Meteor.isServer) {
 
         }
       });
+
+Template.userInput.events({
+  'submit' : function() {
+    console.log("form submitted")
+  }
+});
 
 /*
    Meteor.call("meetupDataGet", function(error, result){

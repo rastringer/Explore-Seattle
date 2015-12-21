@@ -59,7 +59,7 @@ var recommend = function (text) {
 if (Meteor.isClient) {
 
     Template.body.events ({
-      /*"submit .recommendedText": function (event) {
+      "submit .recommendedText": function (event) {
          //Prevent default browser form submit
         event.preventDefault();
 
@@ -72,7 +72,7 @@ if (Meteor.isClient) {
         event.target.text.value = "";
        var result = recommend(text)
        return result;
-      }*/
+      }
     });
 
   Template.body.helpers({
@@ -82,10 +82,10 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-   /* Meteor.publish('textFromUser', function(text){
+    Meteor.publish('textFromUser', function(text){
     return {text: "bubub"}
-    */
 
-  //});
+
+  });
 
 }
