@@ -1,24 +1,27 @@
 <head>
   <title>nlp-insights</title>
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'></head>
+<link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'></head>
 <body>
 <div id = "background">
-    <h1>What would you like to do today?</h1>
+   <span class = "title">What would you like to do today?</span>
+
     <form class="search-zip">
   <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
    
 </form>
- </div>
-         
+ </div>    
   <ul class="large-block-grid-5 medium-block-grid-3 small-block-grid-1 text-center">
     {{#each event in events}}
-   
     <li>
-      <p>{{event.name}}</p>
-      <p>{{event.date}}, {{event.time}}</p>
+    <div class = "content">
+      <p id = "title">{{event.name}}</p>
+      <p class = "details">Date and time:</p>
+      <p class = "data-details">{{event.date}}, {{event.time}}</p>
       <!-- <p>{{event.description}}</p>-->
-      <p>{{event.zip}}, {{#if event.address_1}}{{event.address_1}}{{else}}No Address Data. Please check link{{/if}}</p>
-      <p><a href={{event.url}}>{{event.company_name}} Link</a></p>
+      <p class = "details"> Address: </p>
+      <p class = 'data-details'>{{#if event.address_1}}{{event.address_1}}{{else}}Please check link{{/if}}</p>
+      <p class ="link"><a href={{event.url}}> Open on {{event.company_name}}</a></p>
+      </div>
      </li>
     {{/each}}
   </ul>

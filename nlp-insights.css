@@ -1,14 +1,9 @@
 
 /* CSS declarations go here */
 
-
-
-html {
-  font-family: 'Source Sans Pro';
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-}
 body {
+  font-family: 'Roboto', sans-serif; 
+
   margin: 0;
   background-color: rgb(238, 238, 238);
 }
@@ -27,32 +22,15 @@ body {
     padding-top: 40px;
     text-align: center;
 }
- h1 {
-    color: #F0FFFF;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-h1,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-  display: block;
-}
- h1 {
+
+
+ .title {
   font-family: 'Source Sans Pro';
-  font-weight: 400;
+  font-weight: 300;
   color: #F5FFFA;
   padding-top: 60px;
   text-align: center;
-  font-size: 35px
+  font-size: 38px;
 }
 
 template {
@@ -79,6 +57,39 @@ template {
   background: white;
   height: 15rem;
   vertical-align: top; 
+  cursor: pointer;
+
 }
+li:hover {
+  background: E4E4F2;
+}
+
+.content {
+  text-align: left;
+  padding: 25px 7px 7px 7px;
+}
+.content #title, .details {
+  font-family: 'Roboto', sans-serif;
+  color: #333333;
+  word-break: break-word;
+  width: 100%;
+  line-height: 20px;
+}
+p {
+  margin:0;
+  padding: 0;
+}
+.details {
+  font-size: 16px;
+  color: rgb(113, 113, 120);
+  padding-top: 10px;
+}
+.data-details {
+  font-weight: 300;
+  font-size: 14px;
+  color: #999999;
+  padding-top: 5px;
+}
+
 
 
