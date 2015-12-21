@@ -1,7 +1,8 @@
+
 var recommend = function (text) {
   var scores = {
-  music : 0,
-  movie : 0,
+  music: 0,
+  movie: 0,
   family: 0,
   outdoors: 0,
   nightlife: 0,
@@ -37,23 +38,61 @@ var recommend = function (text) {
      };
      tokenize (text);
 
-  var winner = "";
+  var winner = [];
   var count = 0;
+
 
   for(var prop in scores){
     if (scores[prop] > count){
       count = scores[prop];
-      winner = prop;
     }
-
-    if(scores[prop] == count && winner.indexOf(prop)){
-      winner = winner + "," + prop;
+  }
+  for (var prop in scores){
+    if (scores[prop] >= count){
+      winner.push(prop);
     }
   }
 
-  return "Here are some " + winner + " activities and events suggestions: "
+  if (winner.length == 0)
+  {
+    winner.push("going out");
+  }
 
-}
+return winner;
+
+};
+
+//categorize data for backend and return array of categories
+
+function categorizer(categories, name, description){
+  var nameCategories = recommend(name);
+  var descriptCategories = recommend(name);
+  var sumCategories = [];
+
+  return sumCategories.concat(nameCategories, descriptCategories);
+};
+
+
+//front end finder of events based on categories
+var categoryFind = function(searchText){
+  var userText = recommend(searchText);
+  Events.find({category: userText});
+};
+
+//frontend displayer for
+var categoryDisplayer = function(categories){
+var eventType = "";
+
+  if (categories.length > 1){
+    eventType = categories.join(" and");
+  }
+
+  if (categories.length == 1){
+    eventType = categories[1];
+  }
+
+  return "Here are some " + eventType + " activities and events suggestions: "
+};
 
 //console.log(recommend(text));
 if (Meteor.isClient) {
