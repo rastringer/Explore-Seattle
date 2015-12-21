@@ -10,8 +10,6 @@ body {
 #background {
   background-color: #287DA6;
     background-image: url('http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
     background-position: center top;
     height: 100%;
     width: 100%;
@@ -116,7 +114,6 @@ p {
 .profile-card {
   padding: 1rem;
   margin: 2rem 0;
-  background-color: #fff;
   align-items: center;
   justify-content: center;
   }
@@ -134,27 +131,12 @@ p {
       text-transform: uppercase; }
     .profile-card .profile-info p {
       text-align: center; }
-    .profile-card .profile-info .inline-list {
-      text-align: center;
-      margin-bottom: 1rem; }
-      .profile-card .profile-info .inline-list li {
-        float: none;
-        display: inline-block; }
-      .profile-card .profile-info .inline-list i.fi-social-twitter {
-        font-size: 1.5rem;
-        color: #55acee; }
-        .profile-card .profile-info .inline-list i.fi-social-twitter:hover {
-          transform: scale(1.5);
-          transition: all .5s ease-in-out; }
-      .profile-card .profile-info .inline-list i.fi-social-linkedin {
-        font-size: 1.5rem;
-        color: #0077b5; }
-        .profile-card .profile-info .inline-list i.fi-social-linkedin:hover {
-          transform: scale(1.5);
-          transition: all .5s ease-in-out; }
-      .profile-card .profile-info .inline-list i.fi-social-github {
-        font-size: 1.5rem;
-        color: #333; }
-        .profile-card .profile-info .inline-list i.fi-social-github:hover {
-          transform: scale(1.5);
-          transition: all .5s ease-in-out; }
+
+
+.features-par {
+  font-family: 'Source Sans Pro';
+  margin: auto;
+  font-size: 22px;
+  font-weight: 150px;
+  text-align: center;
+}
