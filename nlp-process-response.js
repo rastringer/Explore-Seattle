@@ -1,8 +1,12 @@
-//var text = "I want to go hiking and fish and trekking and walk in nature. Like, or maybe go to a concert. And get drunk, score some drugs, LOL!. Or perhaps take a walk in nature. Or just party all night if a good DJ is playing. Or maybe go to a pantomime. I've only got like four free hours on sunday so maybe then I'll just relax";
+tester();
+
+
+
+var text = "I want to go hiking and fish and trekking and walk in nature. Like, or maybe go to a concert. And get drunk, score some drugs, LOL!. Or perhaps take a walk in nature. Or just party all night if a good DJ is playing. Or maybe go to a pantomime. I've only got like four free hours on sunday so maybe then I'll just relax";
 var recommend = function (text) {
   var scores = {
-  music : 0,
-  movie : 0,
+  music: 0,
+  movie: 0,
   family: 0,
   outdoors: 0,
   nightlife: 0,
@@ -46,27 +50,65 @@ var recommend = function (text) {
   // console.log(scores.outdoors);
   // console.log(scores.nightlife);
 
-  var winner = "";
+  var winner = [];
   var count = 0;
+
 
   for(var prop in scores){
     if (scores[prop] > count){
       count = scores[prop];
-      winner = prop;
     }
-
-    if(scores[prop] == count && winner.indexOf(prop)){
-      winner = winner + "," + prop;
+  }
+  for (var prop in scores){
+    if (scores[prop] >= count){
+      winner.push(prop);
     }
   }
 
-  return "Here are some " + winner + " activities and events suggestions: "
+  if (winner.length == 0)
+  {
+    winner.push("going out");
+  }
 
-}
+return winner;
+
+};
+
+//categorize data for backend and return array of categories
+
+function categorizer(categories, name, description){
+  var nameCategories = recommend(name);
+  var descriptCategories = recommend(name);
+  var sumCategories = [];
+
+  return sumCategories.concat(nameCategories, descriptCategories);
+};
+
+
+//front end finder of events based on categories
+var categoryFind = function(searchText){
+  var userText = recommend(searchText);
+  Events.find({category: userText});
+};
+
+//frontend displayer for
+var categoryDisplayer = function(categories){
+var eventType = "";
+
+  if (categories.length > 1){
+    eventType = categories.join(" and");
+  }
+
+  if (categories.length == 1){
+    eventType = categories[1];
+  }
+
+  return "Here are some " + eventType + " activities and events suggestions: "
+};
 
 //console.log(recommend(text));
 if (Meteor.isClient) {
-   
+
     Template.body.events ({
       /*"submit .recommendedText": function (event) {
          //Prevent default browser form submit
@@ -74,18 +116,18 @@ if (Meteor.isClient) {
 
         // Get value from form element
          var text  = event.target.text.value;
-         
+
 
         //Meteor.subscribe("textFromUser", text);
         // Clear form
-        event.target.text.value = "";  
-       var result = recommend(text) 
+        event.target.text.value = "";
+       var result = recommend(text)
        return result;
       }*/
     });
 
   Template.body.helpers({
-  
+
   });
 }
 
@@ -95,6 +137,6 @@ if (Meteor.isServer) {
     return {text: "bubub"}
     */
 
-  //}); 
- 
+  //});
+
 }
