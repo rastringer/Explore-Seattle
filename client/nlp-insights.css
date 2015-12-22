@@ -14,7 +14,7 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    color: #ffffff;
+    color: #F5FFFA;
     padding-bottom: 40px;
     padding-top: 40px;
     text-align: center;
@@ -25,7 +25,7 @@ body {
   font-family: 'Source Sans Pro';
   font-weight: 300;
   color: #F5FFFA;
-  padding-top: 60px;
+  padding-top: 70px;
   text-align: center;
   font-size: 38px;
 }
