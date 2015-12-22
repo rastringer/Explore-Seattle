@@ -19,9 +19,9 @@ if (!(typeof MochaWeb === 'undefined')){
         chai.assert(Events.find({company_name: 'Meetup'}).count() > 0);
       });
 
-      // it("should contain data from Seattle Stranger", function(){
-      //   chai.assert(Events.find({company_name: 'Seattle Stranger'}).count() > 0);
-      // });
+      it("should contain data from Seattle Stranger", function(){
+        chai.assert(Events.find({company_name: 'Seattle Stranger'}).count() > 0);
+      });
     });
 
   });
