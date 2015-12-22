@@ -32,6 +32,29 @@ body {
   font-size: 38px;
 }
 
+.date-pick-title{
+  font-family: 'Source Sans Pro';
+  font-weight: 300;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 38px;
+}
+
+.date-pick-input{
+  top-margin: 20px;
+  text-align: center;
+  margin: auto;
+  width: 50%;
+}
+
+.modal{
+  visibility:visible;
+}
+
+.date-form{
+  visibility: hidden;
+}
+
 template {
   text-align: center;
   margin: auto;
