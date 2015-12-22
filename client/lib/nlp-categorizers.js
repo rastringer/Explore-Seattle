@@ -1,8 +1,10 @@
 //front end finder of events based on categories
-var categoryFind = function(searchText){
-  var userText = recommend(searchText);
-  Events.find({category: userText});
+categoryBuild = function(searchText){
+  var categoryArray = recommend(searchText);
+  return categoryArray
 };
+
+
 
 //frontend displayer for
 categoryDisplayer = function(categories){
