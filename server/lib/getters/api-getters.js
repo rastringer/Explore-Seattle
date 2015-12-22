@@ -13,7 +13,7 @@ Meteor.methods({
  meetupDataGet: function(){
    this.unblock();
    return Meteor.http.call("GET", "https://api.meetup.com/2/open_events.json?zip=98109&time=,2m&key=595675274d4211175b522771323d075");
- },
+ }
 //
 //   strangerDataGet: function(){
 //     this.unblock();
