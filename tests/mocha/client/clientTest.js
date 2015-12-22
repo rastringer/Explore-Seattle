@@ -62,5 +62,12 @@ MochaWeb.testOnly(function(){
 
   });
 
-});
+  describe("categoryBuild", function(){
+    it("returns category array when given text", function(){
+      var text = "My family wants to have fun";
+      var results = categoryBuild(text);
+      chai.assert.equal(results, 'family');
+    })
+  })
 
+});

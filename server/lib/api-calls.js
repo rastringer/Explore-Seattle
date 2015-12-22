@@ -104,50 +104,124 @@ callApi = function() {
       });
 
 
-      // Meteor.call("strangerDataGet", function(error, result){
-      //      if(error) console.log("The StrangerDataGet error is " + error)
-      //      console.log("Pulling stranger data");
-      //
-      //      var events = JSON.parse(result.content);
-      //      var eventData = events.results.collection1;
-      //
-      //      for(var i = 0; i < eventData.length -1; i++){
-      //
-      //        var monthNumReturn = function(monthName){
-      //          var monthNames = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July',
-      //          'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      //
-      //          return monthNames.indexOf(monthName);
-      //        };
-      //
-      //        var yearReturn = function(){
-      //          var time = new Date();
-      //          var year = time.getFullYear();
-      //          return year;
-      //        };
-      //
-      //        var year = yearReturn()
-      //        var monthNum = monthNumReturn(eventData[i].Month);
-      //        var dates = eventData[i].Day + " " + monthNum + " " +  year;
-      //        var neighborhood = eventData[i].Venue.text + " in " + eventData[i].Neighborhood;
-      //
-      //        Events.insert({
-      //          name: eventData[i].Title.text,
-      //          description: "Please see the url for a description",
-      //          address: neighborhood,
-      //          time: eventData[i].Time,
-      //          date: dates,
-      //          url: eventData[i].Title.href,
-      //          city: 'Seattle',
-      //          state: 'WA',
-      //          zip: '98101',
-      //          company_name: "Seattle Stranger",
-      //          category:[],
-      //          venue_url: eventData[i].Venue.href,
-      //          price: eventData[i].Price
-      //
-      //        });
-      //      };
-      //   //end stranger call
-      //    });
+      Meteor.call("strangerDataGet", function(error, result){
+           if(error) console.log("The StrangerDataGet error is " + error)
+           console.log("Pulling stranger data");
+
+           var events = JSON.parse(result.content);
+           var eventData = events.results.collection1;
+
+           for(var i = 0; i < eventData.length -1; i++){
+
+             var dateSlicer = function(dateMonth){
+                var date = dateMonth.slice(-2);
+                return date;
+              };
+
+              var monthSlicer = function(dateMonth){
+                 var month = dateMonth.slice(0,3);
+                 return month;
+               };
+
+               var getDateNum = function(dateMonth){
+                 var dateOff = dateSlicer(dateMonth);
+
+                 for(var i = 1; i < 10; i++){
+                   if (dateOff == i){
+                     dateOff = "0" + i;
+                   }
+                 }
+                 return dateOff;
+               };
+
+              var getMonthNum = function(dateMonth){
+                var monthNum = monthSlicer(dateMonth);
+
+                if(monthNum == "Jan"){
+                  monthNum = '01';
+                }
+
+                if(monthNum =="Feb"){
+                  monthNum = '02';
+                }
+
+                if(monthNum =="Mar"){
+                  monthNum = '03';
+                }
+
+                if(monthNum =="Apr"){
+                  monthNum = '04';
+                }
+
+                if(monthNum =="May"){
+                  monthNum = '05';
+                }
+
+                if(monthNum =="Jun"){
+                  monthNum = '06';
+                }
+
+                if(monthNum =="Jul"){
+                  monthNum = '07';
+                }
+
+                if(monthNum =="Aug"){
+                  monthNum = '08';
+                }
+
+                if(monthNum =="Sep"){
+                  monthNum = '09';
+                }
+
+                if(monthNum =="Oct"){
+                  monthNum = '10';
+                }
+
+                if(monthNum =="Nov"){
+                  monthNum ='11';
+                }
+
+                if(monthNum == "Dec"){
+                  monthNum = '12';
+                }
+
+                return monthNum;
+              };
+
+               var getYear = function(monthNum){
+                 var year;
+                 if(monthNum == 12){
+                   return year = 2015;
+                 }
+
+                 return year = 2016;
+               };
+
+               var days = getDateNum(eventData[i].monthDay);
+               var months = getMonthNum(eventData[i].monthDay);
+               var years = getYear(months);
+
+               var fullDate = years + "-" + months + "-" + days;
+
+
+
+              var categories = categorizer(eventData[i].name, eventData[i].description);
+
+             Events.insert({
+               name: eventData[i].name,
+               description: eventData[i].description,
+               address: eventData[i].address,
+               time: eventData[i].time,
+               date: fullDate,
+               url: eventData[i].url,
+               city: eventData[i].city,
+               state: eventData[i].state,
+               zip: eventData[i].zip,
+               company_name: "Seattle Stranger",
+               category:categories,
+
+             });
+           };
+        //end stranger call
+         });
   };
