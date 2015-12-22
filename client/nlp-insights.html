@@ -1,11 +1,11 @@
 <head>
-  <title>nlp-insights</title>
+  <title>Explore Seattle</title>
 <link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css'>
 </head>
 
 <template name="main">
     <!-- <nav aria-label="You are here:" role="navigation">{{> about}}</nav> -->
-    <h6>Placeholder for app name</h6>
+    <h6>Explore Seattle</h6>
     {{> navigation}}
     {{> yield}}
 </template>
@@ -18,7 +18,16 @@
     <form class="search-zip">
       <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
     </form>
+    <div class="date-form">
+      <h2 class="date-pick-title">When would you like to do it?</h2>
+      <form class="date-pick-input">
+        <input type="date" name='date' id="test">
+        <input type="submit" value="Show Events">
+      </form>
+    </div>
+
   </div>
+
   {{> lists}}
 
 </body>

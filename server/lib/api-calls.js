@@ -10,18 +10,11 @@ callApi = function() {
           if(eventData[i].url != undefined)
 
             var dateTime = new Date(eventData[i].start.local);
-            var day = dateTime.getDate();
-            var month = dateTime.getMonth() + 1;
-            var year = dateTime.getFullYear();
-            var hour = dateTime.getHours();
-            var minute = dateTime.getMinutes();
-            var dates = day + " "+ month + " " + year;
-            var minuteBuilder = function(minute){
-              if (minute == 0) minute = "00";
-              return  minute;
-            }
-            var minutes = minuteBuilder(minute);
-            var times = hour + ":" + minutes;
+
+            var dateTime = moment(eventData[i].start.local);
+            var fullDate = dateTime.format('YYYY-MM-DD');
+            var time = dateTime.format('hh:mm a');
+
             var titleToLowerCase = eventData[i].name.text.toLowerCase();
             var title = titleToLowerCase.charAt(0).toUpperCase() + titleToLowerCase.slice(1);
 
@@ -30,8 +23,8 @@ callApi = function() {
             name: title,
             description: eventData[i].description.text,
             address: "Seattle",
-            time: times,
-            date: dates,
+            time: time,
+            date: fullDate,
             url: eventData[i].url,
             city: "Seattle",
             state: "WA",
@@ -52,19 +45,10 @@ callApi = function() {
          var eventData = events.events.event;
          for(var i = 0; i < eventData.length -1; i++){
            if(eventData[i].url != undefined)
-             var dateTime = new Date(eventData[i].start_time);
-             var day = dateTime.getDate();
-             var month = dateTime.getMonth() +1;
-             var year = dateTime.getFullYear();
-             var hour = dateTime.getHours();
-             var minute = dateTime.getMinutes();
-             var dates = day+ " "+ month + " " + year;
-             var minuteBuilder = function(minute){
-               if (minute == 0) minute = "00";
-               return  minute;
-             }
-             var minutes = minuteBuilder(minute);
-             var times = hour + ":" + minutes;
+
+             var dateTime = moment(eventData[i].start_time);
+             var fullDate = dateTime.format('YYYY-MM-DD');
+             var time = dateTime.format('hh:mm a');
 
              var categories = categorizer(eventData[i].title, eventData[i].description);
 
@@ -72,8 +56,8 @@ callApi = function() {
              name: eventData[i].title,
              description: eventData[i].description,
              address: eventData[i].venue_address,
-             date: dates,
-             time: times,
+             date: fullDate,
+             time: time,
              url: eventData[i]["url"],
              city: eventData[i].city_name,
              state: eventData[i].region_abbr,
@@ -91,37 +75,26 @@ callApi = function() {
         console.log("Pulling meetup data");
 
         result = JSON.parse(result.content);
-        var events = result.results;
+        var eventData = result.results;
 
-        for(var i = 0; i < events.length -1; i++){
-           if(events[i].venue != undefined){
-             var dateTime = new Date(events[i].time);
-             var day = dateTime.getDate();
-             var month = dateTime.getMonth();
-             var year = dateTime.getFullYear();
-             var hour = dateTime.getHours();
-             var minute = dateTime.getMinutes();
+        for(var i = 0; i < eventData.length -1; i++){
+           if(eventData[i].venue != undefined){
+             var dateTime = moment(eventData[i].time);
+             var fullDate = dateTime.format('YYYY-MM-DD');
+             var time = dateTime.format('hh:mm a');
 
-            var dates = day+ " "+ month + " " + year;
-             var minuteBuilder = function(minute){
-               if (minute == 0) minute = "00";
-               return  minute;
-             }
-             var minutes = minuteBuilder(minute);
-             var times = hour + ":" + minutes;
-
-             var categories = categorizer(events[i].name, events[i].description);
+             var categories = categorizer(eventData[i].name, eventData[i].description);
 
              Events.insert({
-               name: events[i].name,
-               description: events[i].description,
-               address: events[i].venue['address_1'],
-               time: times,
-               date: dates,
-               url: events[i]["event_url"],
-               city: events[i].venue.city,
-              state: events[i].venue.state,
-              zip: events[i].venue.zip,
+               name: eventData[i].name,
+               description: eventData[i].description,
+               address: eventData[i].venue['address_1'],
+               time: time,
+               date: fullDate,
+               url: eventData[i]["event_url"],
+               city: eventData[i].venue.city,
+              state: eventData[i].venue.state,
+              zip: eventData[i].venue.zip,
              company_name: "Meetup",
              category:categories
             });
@@ -178,5 +151,3 @@ callApi = function() {
       //   //end stranger call
       //    });
   };
-
-

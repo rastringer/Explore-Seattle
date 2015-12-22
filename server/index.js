@@ -13,7 +13,7 @@ callApi();
 //       var dateTime = new Date();
 //       var hour = dateTime.getHours();
 //       if (hour=="00") {
-//         Events.remove({});
+//
 //         callAPI();
 //       }
 //    }
