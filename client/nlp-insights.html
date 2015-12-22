@@ -19,7 +19,7 @@
       <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
     </form>
     <div class="date-form">
-      <h2 class="date-pick-title">When would you like to do it?</h2>
+      <h2 class="title">When would you like to do it?</h2>
       <form class="date-pick-input">
         <input type="date" name='date' id="test">
         <input type="submit" value="Show Events">
@@ -44,14 +44,14 @@
   <ul class="large-block-grid-5 medium-block-grid-3 small-block-grid-1 text-center">
     {{#each event in events}}
     <li>
-
-    <div class = "content">
-      <p id = "title">{{event.name}}</p>
+    <div id={{event._id}} class = "content">
+    <label for = "modal-1">
+        <p id = "title"> {{event.name}}</p>
+      </label>
       <p class = "details">Date and time:</p>
       <p class = "data-details">{{event.date}}, {{event.time}}</p>
-      <!-- <p>{{event.description}}</p>-->
       <p class = "details"> Address: </p>
-      <p class = 'data-details'>{{#if event.address_1}}{{event.address_1}}{{else}}Please check link{{/if}}</p>
+      <p class = 'data-details'>{{#if event.address}}{{event.address}}{{else}}Please check link{{/if}}</p>
       <p class ="link"><a href={{event.url}}> Open on {{event.company_name}}</a></p>
       </div>
      </li>

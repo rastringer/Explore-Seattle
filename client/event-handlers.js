@@ -26,6 +26,38 @@ Template.home.events({
   }
 });
 
+Template.lists.events ({
+"click .content": function (e) {
+  var id = e.target.parentElement.id;
+  var event = Events.findOne(id);
+  console.log(event);
+  if (event.address == "undefined") {
+    event.address = "Please check link below."
+  };
+
+  $('.content').append(
+     '<input class="modal-state" id = "modal-1" type = "checkbox">' +
+      '<div class="modal">' +
+        '<div class="modal__inner">' +
+          '<label class="modal__close" for="modal-1"></label>' +
+          '<p class = "title-box inside">' + event.name + '</p>' +
+          '<p class = "details-box inside"> Date and time: '  + event.date + ' , ' + event.time + '</p>' +
+          '<p class = "details-box inside"> Address: ' + event.address + '</p>' +
+          '<p class ="link inside"><a href=' + event.url + '> Open on ' + event.company_name + '</a></p>' +
+          '<p>' + event.url + '</p>' +
+          '<p class = "details-box inside" id = "description-title">Description:</p>' +
+          '<p class = "details-info-box inside" id = "description">' + event.description + '</p>' +
+        '</div>' +
+       '</div>'
+    );
+  },
+  "click .modal__close": function (e) {
+    $( ".modal-state" ).remove();
+    $('.modal').remove();
+  }
+
+})
+
 
 // Template.home.events({
 //     "submit .search-zip": function (event) {
