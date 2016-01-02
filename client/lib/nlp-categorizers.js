@@ -4,8 +4,6 @@ categoryBuild = function(searchText){
   return categoryArray
 };
 
-
-
 //frontend displayer for
 categoryDisplayer = function(categories){
 var eventType = "";
