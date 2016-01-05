@@ -1,0 +1,18 @@
+<template name="home">
+  <div id = "background">
+   <span class = "title">What would you like to do?</span>
+    <form class="search-zip">
+      <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+    </form>
+    <div class="date-form">
+      <h2 class="title">When would you like to do it?</h2>
+      <form class="date-pick-input">
+        <input type="date" name='date' id="test">
+        <input type="submit" value="Show Events">
+      </form>
+    </div>
+  </div>
+
+  {{> lists}}
+  {{> eventDetails}}
+</template>
