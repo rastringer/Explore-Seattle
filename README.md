@@ -1,10 +1,10 @@
 # nlp-insights
 
-XXXX uses natural language processing to discern a user's request to help find events and activities in Seattle. The app draws data from the Eventful, Eventbrite and Meetup website APIs.
+Explore uses natural language processing to discern a user's request to help find events and activities in Seattle. The app draws data from the Eventful, Eventbrite and Meetup website APIs.
 
 Technology
 
-Four colleagues wrote the app over a week using the Meteor framework. We used the ewall:foundation port for front-end design, and XXXX for testing.
+Four colleagues wrote the app over a week using the Meteor framework. We used the ewall:foundation port for front-end design, and Velocity for testing.
 
 Language processing
 
