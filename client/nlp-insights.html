@@ -10,29 +10,6 @@
     {{> yield}}
 </template>
 
-<template name="home">
-  <body>
-
-  <div id = "background">
-   <span class = "title">What would you like to do?</span>
-    <form class="search-zip">
-      <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
-    </form>
-    <div class="date-form">
-      <h2 class="title">When would you like to do it?</h2>
-      <form class="date-pick-input">
-        <input type="date" name='date' id="test">
-        <input type="submit" value="Show Events">
-      </form>
-    </div>
-
-  </div>
-
-  {{> lists}}
-
-</body>
-
-</template>
 <template name="navigation">
     <ul class="nav">
         <li data-template="home" role="presentation" class="active"><a href="{{pathFor route='home'}}">Home</a></li>
@@ -40,21 +17,46 @@
         <li data-template="about" role="presentation" class="active"><a href="{{pathFor route='about'}}">About us</a></li>
     </ul>
 </template>
+
+<template name="home">
+  <div id="background">
+   <span class="title">What would you like to do?</span>
+    <form class="search-zip">
+      <input type="text" name="text" placeholder="Music, arts, sport, family events, or nightlife">
+    </form>
+    <div class="date-form">
+      <h2 class="title">When would you like to do it?</h2>
+      <form class="date-pick-input">
+        <input id="my-datepicker" type="text" class='form-control'>
+        <input type="submit" value="Show Events">
+      </form>
+    </div>
+
+  </div>
+
+  {{> lists}}
+</template>
+
 <template name="lists">
   <ul class="large-block-grid-5 medium-block-grid-3 small-block-grid-1 text-center">
-    {{#each event in events}}
+    {{#each event in filteredEvents}}
     <li>
-    <div id={{event._id}} class = "content">
-    <label for = "modal-1">
-        <p id = "title"> {{event.name}}</p>
-      </label>
-      <p class = "details">Date and time:</p>
-      <p class = "data-details">{{event.date}}, {{event.time}}</p>
-      <p class = "details"> Address: </p>
-      <p class = 'data-details'>{{#if event.address}}{{event.address}}{{else}}Please check link{{/if}}</p>
-      <p class ="link"><a href={{event.url}}> Open on {{event.company_name}}</a></p>
+    <label for="modal-1">
+    <div id={{event._id}} class="content">
+
+        <p id="title"> {{event.name}}</p>
+      <p class="details">Date and time:</p>
+      <p class="data-details">{{event.date}}, {{event.time}}</p>
+      <p class="details"> Address: </p>
+      <p class='data-details'>{{#if event.address}}{{event.address}}{{else}}Please check link{{/if}}</p>
+      <p class="link"><a href={{event.url}}> Open on {{event.company_name}}</a></p>
+
       </div>
+    </label>
+
      </li>
+     {{else}}
+     <p>Sorry, no events fit your query</p>
     {{/each}}
   </ul>
 </template>

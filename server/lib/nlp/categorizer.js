@@ -5,6 +5,6 @@ categorizer = function(name, description){
   if (description == undefined || description == null){
     return recommend(name);
   }else{
-    return recommend(name);
+    return recommend(description);
   }
 };

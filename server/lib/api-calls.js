@@ -19,27 +19,30 @@ callApi = function() {
             var title = titleToLowerCase.charAt(0).toUpperCase() + titleToLowerCase.slice(1);
 
           var categories = categorizer(title, eventData[i].description.text);
-          Events.insert({
-            name: title,
-            description: eventData[i].description.text,
-            address: "Seattle",
-            time: time,
-            date: fullDate,
-            url: eventData[i].url,
-            city: "Seattle",
-            state: "WA",
-            zip: "98101",
-            category: categories,
-            company_name: "Eventbrite"
-            });
-
+          Events.upsert({
+              name: title,
+              date: fullDate},
+            {$set:{
+              name: title,
+              date: fullDate,
+              address: "Seattle",
+              time: time,
+              date: fullDate,
+              url: eventData[i].url,
+              city: "Seattle",
+              state: "WA",
+              zip: "98101",
+              category: categories,
+              company_name: "Eventbrite"
+            }}
+          );
         };
       });
 
       Meteor.call("eventfulDataGet", function(error, result){
          if(error) console.log("The error is " + error);
 
-         console.log("Pulling evenful data");
+         console.log("Pulling eventful data");
 
          var events = JSON.parse(result.content);
          var eventData = events.events.event;
@@ -52,7 +55,10 @@ callApi = function() {
 
              var categories = categorizer(eventData[i].title, eventData[i].description);
 
-           Events.insert({
+           Events.upsert({
+             name: eventData[i].title,
+             date: fullDate,
+           }, {$set:{
              name: eventData[i].title,
              description: eventData[i].description,
              address: eventData[i].venue_address,
@@ -64,7 +70,8 @@ callApi = function() {
              zip: eventData[i].postal_code,
              category: categories,
              company_name: "Eventful"
-           });
+           }}
+           );
 
          }
        });
@@ -85,19 +92,23 @@ callApi = function() {
 
              var categories = categorizer(eventData[i].name, eventData[i].description);
 
-             Events.insert({
-               name: eventData[i].name,
-               description: eventData[i].description,
-               address: eventData[i].venue['address_1'],
-               time: time,
-               date: fullDate,
-               url: eventData[i]["event_url"],
-               city: eventData[i].venue.city,
-              state: eventData[i].venue.state,
-              zip: eventData[i].venue.zip,
-             company_name: "Meetup",
-             category:categories
-            });
+            Events.upsert({
+              name: eventData[i].name,
+              date: fullDate},
+              {$set:{
+                name: eventData[i].name,
+                date: fullDate,
+                description: eventData[i].description,
+                address: eventData[i].venue['address_1'],
+                time: time,
+                date: fullDate,
+                url: eventData[i]["event_url"],
+                city: eventData[i].venue.city,
+                state: eventData[i].venue.state,
+                zip: eventData[i].venue.zip,
+                company_name: "Meetup",
+                category:categories
+           }});
           }
         }
         //finish meetup
@@ -207,20 +218,25 @@ callApi = function() {
 
               var categories = categorizer(eventData[i].name, eventData[i].description);
 
-             Events.insert({
+             Events.upsert({
                name: eventData[i].name,
-               description: eventData[i].description,
-               address: eventData[i].address,
-               time: eventData[i].time,
-               date: fullDate,
-               url: eventData[i].url,
-               city: eventData[i].city,
-               state: eventData[i].state,
-               zip: eventData[i].zip,
-               company_name: "Seattle Stranger",
-               category:categories,
+               description: eventData[i].description},
+               {$set:{
+                 name: eventData[i].name,
+                 description: eventData[i].description,
+                 address: eventData[i].address,
+                 time: eventData[i].time,
+                 date: fullDate,
+                 url: eventData[i].url,
+                 city: eventData[i].city,
+                 state: eventData[i].state,
+                 zip: eventData[i].zip,
+                 company_name: "Seattle Stranger",
+                 category:categories,
+               }}
 
-             });
+
+             );
            };
         //end stranger call
          });

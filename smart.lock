@@ -1,0 +1,15 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "feedparser": {}
+    },
+    "packages": {
+      "feedparser": {
+        "git": "https://github.com/DBeath/meteor-feedparser.git",
+        "tag": "v0.16.6",
+        "commit": "53c121f56949b6fe022dc8640087e1ad739db7d9"
+      }
+    }
+  }
+}

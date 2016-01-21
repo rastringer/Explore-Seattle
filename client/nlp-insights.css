@@ -11,7 +11,7 @@ body {
   background-color: #287DA6;
     background-image: url('http://images.nationalgeographic.com/wpf/media-live/photos/000/239/custom/23939_1600x1200-wallpaper-cb1282059611.jpg');
     background-position: center top;
-    height: 100%;
+    min-height: 465px;
     width: 100%;
     position: relative;
     color: #F5FFFA;

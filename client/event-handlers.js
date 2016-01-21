@@ -1,27 +1,42 @@
 searchText = "";
 userCategories=[];
 dateInfo = "";
+Meteor.subscribe('eventData');
+
 
 Template.home.events({
     "submit .search-zip": function (event) {
        //Prevent default browser form submit
       event.preventDefault();
+      Session.set('userCategories', []);
       searchText = event.target.text.value;
       console.log("Search text is " + searchText);
       userCategories = categoryBuild(searchText);
       console.log(userCategories);
+      Session.set('getEvents', userCategories);
       $(".date-form").css('visibility', 'visible');
 
     }
   });
 
 Template.home.events({
+  // "keypress .date-pick-input": function (event){
+  //   event.preventDefault();
+  //   Session.set('dateInfo', "");
+  //   dateInfo = $('#date').val();
+  //   console.log(dateInfo);
+  //
+  //   Session.set('getEvents',dateInfo);
+  //
+  // },
+
   "submit .date-pick-input": function (event){
     event.preventDefault();
-    dateInfo = $('#test').val();
+    Session.set('dateInfo', "");
+    dateInfo = $('#my-datepicker').val();
     console.log(dateInfo);
 
-    Meteor.subscribe('eventData', userCategories, dateInfo);
+    Session.set('getEvents',dateInfo);
 
   }
 });
@@ -58,19 +73,34 @@ Template.lists.events ({
 
 })
 
+Template.lists.helpers({
+  filteredEvents: function(){if(Session.get('getEvents')){
+    console.log("Date info is " + dateInfo);
 
-// Template.home.events({
-//     "submit .search-zip": function (event) {
-//        //Prevent default browser form submit
-//       event.preventDefault();
-//
-//       // Get value from form element
-//       var zipNum = event.target.text.value;
-//       console.log(zipNum);
-//
-//       Meteor.subscribe("eventData", zipNum);
-//
-//       // Clear form
-//       event.target.text.value = "";
-//     }
-//   });
+      if(userCategories.length > 1){
+        console.log("Categories are " + userCategories[0] + " and " + userCategories[1]);
+
+
+      return  Events.find({
+        $and:[{date:dateInfo},{$or: [ { category: userCategories[0]},{ category: userCategories[1]}]}]});
+      }
+
+      if(userCategories.length == 1){
+        console.log("Categories are " + userCategories[0]);
+        return Events.find({
+          $and:[
+              {date:dateInfo}, {category:userCategories[0]}]});
+
+      }
+  }
+}
+  });
+
+Template.home.rendered = function() {
+  $('#my-datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    container: '.date-pick-input',
+    autoclose: true,
+    todayHighlight: true
+  });
+};
